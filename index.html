@@ -11,18 +11,19 @@
     <title>Meme Generator</title>
 </head>
 
-<body onload="onInit()">
+<!-- onresize="resizeCanvas()" -->
+<body onload="onInit()" >
     <header class="flex justify-center">
         <nav class="links-container flex container">
             <div class="logo-container"><img src="img/LOGO.png" alt="meme logo"></div>
             <ul class="nav-links flex align-center list-style">
-                <li>gallery</li>
+                <li onclick="ontoggleGallery()">gallery</li>
                 <li>about</li>
             </ul>
         </nav>
     </header>
     <main class="flex align-center">
-        <section class="content-container container hide">
+        <section class="content-container container">
             <div class="user-panel">
                 <input type="search" name="search-bar" placeholder="search">
                 <span class="key-words"></span>
@@ -32,18 +33,28 @@
                 <!----------------- RENDER CONTENT FROM JAVASCRIPT ----------->
             </section>
         </section>
-        <section class="meme-editor container flex">
+        <section class="meme-editor container flex hide">
             <div class="canvas-container">
                 <canvas class="canvas" height="400" width="400" style="border: 1px solid black;"></canvas>
             </div>
-            <div class="edit-panel">5</div>
+            <div class="edit-panel flex container">
+                <input type="text" name="wrute-meme" placeholder="enter your text" onchange="DrawTextOnCanvas(this.value)">
+                <button>delete</button>
+                <button>font</button>
+                <button>align</button>
+                <button>size</button>
+                <label for="color-picker">pic a color </label>
+                <input id="color-picker" type="color" name="font-size">
+                <button>up</button>
+                <button>down</button>
+            </div>
         </section>
     </main>
     <footer>D</footer>
 
 
 
-    
+
     <script src="js/util-service.js"></script>
     <script src="js/storage-service.js"></script>
     <script src="js/meme-generator-service.js"></script>

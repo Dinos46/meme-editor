@@ -1,8 +1,10 @@
 /*.............. Helpers............ */
 .grid {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .flex {
@@ -23,6 +25,7 @@
 
 .container {
     max-width: 900px;
+    margin: 0 1rem;
 }
 
 .hide {

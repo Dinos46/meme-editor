@@ -49,12 +49,10 @@ main {
 
 main .content-container {
     background-color: #383b42;
+    width: 100%;
+    
 }
 
-main .gallery {
-    border: 2px solid;
-    flex: 2;
-}
 
 /*............... MEME-EDITOR ................... */
 .meme-editor {
@@ -63,4 +61,19 @@ main .gallery {
 }
 .edit-panel {
     border: 2px solid;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+.edit-panel > *:not(:first-child) {
+    margin-block-start: 1rem;
+}
+
+.edit-panel input[name="font-size"],
+.edit-panel label[for="color-picker"] {
+    align-self: center;
+}
+
+.canvas-container {
+    background: #fff;
 }

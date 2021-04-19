@@ -3,33 +3,46 @@
 const gCanvas = document.querySelector('.canvas');
 const gCtx = gCanvas.getContext('2d');
 
-function onInit(){
+
+function onInit() {
     renderGalery();
+}
+
+function renderGalery() {
+    let imgs = getImgToDisplay();
+    let imgStrHtml = imgs.map(function (img) {
+        return `<div  onclick="renderMemeEditor(${img.id})" class="card">
+        <img src="${img.url}">
+        </div>`;
+    }).join('');
+    const elGallery = document.querySelector('.gallery');
+    elGallery.innerHTML = imgStrHtml;
+
+}
+
+function renderMemeEditor(idx) {
+    // createMeme(idx);
+    ontoggleGallery();
+    let img = getImgByIdx(idx);
+    drawImgOnCanvas(img.id);
+    clearCanvas()
+    setTxtStyle();
     // resizeCanvas();
 }
 
-function renderGalery(){
-    let imgs = getImgToDisplay();
-    let imgStrHtml = imgs.map(function(img){
-        return `
-        <div class="card">
-        <img src="${img.url}">
-        </div>`;
 
-    });
-    const elGallery = document.querySelector('.gallery');
-    elGallery.innerHTML = imgStrHtml;
-    console.log(imgs)
+function DrawTextOnCanvas(txt) {
+    gCtx.fillStyle = 'green';
+    // gCtx.font = '30px Arial'
+    gCtx.fillText('hello', 400, 500);
 }
 
-function renderMemeEditor(){
-    
+function ontoggleGallery() {
+    const elMemeEditor = document.querySelector('.meme-editor');
+    const elMainContent = document.querySelector('.content-container');
+    elMainContent.classList.toggle('hide');
+    elMemeEditor.classList.toggle('hide');
 }
-
-function onUpdate(){}
-function onRemove(){}
-function onAdd(){}
-
 
 function downloadMeme(elLink) {
     const data = gCanvas.toDataURL()
@@ -37,13 +50,15 @@ function downloadMeme(elLink) {
     elLink.download = 'my-meme.jpg'
 }
 
-drawImgOnCanvas();
+function clearCanvas() {
+    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+}
 
-function drawImgOnCanvas() {
+function drawImgOnCanvas(idx) {
     var img = new Image()
-    img.src = './img/1.jpg';
+    img.src = `./img/${idx}.jpg`;
     img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
     }
 }
 
