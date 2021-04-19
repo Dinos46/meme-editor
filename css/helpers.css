@@ -1,0 +1,30 @@
+/*.............. Helpers............ */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.list-style {
+    list-style-type: none;
+}
+
+.container {
+    max-width: 900px;
+}
+
+.hide {
+    display: none;
+}

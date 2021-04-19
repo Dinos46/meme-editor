@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="img/favicon-32x32.png" type="image/png">
+    <title>Meme Generator</title>
+</head>
+
+<body onload="onInit()">
+    <header class="flex justify-center">
+        <nav class="links-container flex container">
+            <div class="logo-container"><img src="img/LOGO.png" alt="meme logo"></div>
+            <ul class="nav-links flex align-center list-style">
+                <li>gallery</li>
+                <li>about</li>
+            </ul>
+        </nav>
+    </header>
+    <main class="flex align-center">
+        <section class="content-container container hide">
+            <div class="user-panel">
+                <input type="search" name="search-bar" placeholder="search">
+                <span class="key-words"></span>
+                <button>more</button>
+            </div>
+            <section class="gallery grid">
+                <!----------------- RENDER CONTENT FROM JAVASCRIPT ----------->
+            </section>
+        </section>
+        <section class="meme-editor container flex">
+            <div class="canvas-container">
+                <canvas class="canvas" height="400" width="400" style="border: 1px solid black;"></canvas>
+            </div>
+            <div class="edit-panel">5</div>
+        </section>
+    </main>
+    <footer>D</footer>
+
+
+
+    
+    <script src="js/util-service.js"></script>
+    <script src="js/storage-service.js"></script>
+    <script src="js/meme-generator-service.js"></script>
+    <script src="js/meme-generator-controller.js"></script>
+</body>
+
+</html>

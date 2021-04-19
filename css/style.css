@@ -1,0 +1,66 @@
+@import "./helpers.css";
+@import "./typography.css";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    background-color: #22252c;
+    font-family: popins-regular, sans-serif;
+    color: linen;
+}
+
+img {
+    width: 100%;   
+}
+
+/*................ HEADER .........................*/
+header {
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    padding: 1.5rem;
+}
+
+header .links-container {
+    justify-content: space-between;
+}
+
+header .logo-container {
+    width: 10%;
+}
+
+header ul.nav-links {
+    justify-content: space-around;
+}
+
+ul.nav-links li:not(:last-child) {
+    padding-inline-end: 1.5rem;
+}
+
+/*.................. MAIN..............  */
+/*................... GALLERY .............................. */
+main {
+    flex-direction: column;
+    padding-block-start: 1.5rem;
+}
+
+main .content-container {
+    background-color: #383b42;
+}
+
+main .gallery {
+    border: 2px solid;
+    flex: 2;
+}
+
+/*............... MEME-EDITOR ................... */
+.meme-editor {
+    width: 100%;
+    justify-content: space-around;
+}
+.edit-panel {
+    border: 2px solid;
+}
