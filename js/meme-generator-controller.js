@@ -1,7 +1,7 @@
 'use strict';
 
-const gCanvas = document.querySelector('.canvas');
-const gCtx = gCanvas.getContext('2d');
+let gCanvas;
+let gCtx;
 
 
 function onInit() {
@@ -21,20 +21,24 @@ function renderGalery() {
 }
 
 function renderMemeEditor(idx) {
-    // createMeme(idx);
+    renderCanvas();
+    setCurImgIdx(idx);
+    drawImgOnCanvas(idx);
+}
+
+function renderCanvas(){
+    let strHtml = `<canvas class="canvas" height="400" width="400"></canvas>`;
+    const elCanvas = document.querySelector('.canvas-container');
+    elCanvas.innerHTML = strHtml;
+    gCanvas = document.querySelector('.canvas');
+    gCtx = gCanvas.getContext('2d');
     ontoggleGallery();
-    let img = getImgByIdx(idx);
-    drawImgOnCanvas(img.id);
-    clearCanvas()
-    setTxtStyle();
-    // resizeCanvas();
+    
 }
 
 
 function DrawTextOnCanvas(txt) {
-    gCtx.fillStyle = 'green';
-    // gCtx.font = '30px Arial'
-    gCtx.fillText('hello', 400, 500);
+    setNewLine(txt);
 }
 
 function ontoggleGallery() {
@@ -50,15 +54,14 @@ function downloadMeme(elLink) {
     elLink.download = 'my-meme.jpg'
 }
 
-function clearCanvas() {
-    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
-}
+
 
 function drawImgOnCanvas(idx) {
     var img = new Image()
     img.src = `./img/${idx}.jpg`;
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+        drawTxt();
     }
 }
 

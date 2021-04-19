@@ -34,6 +34,7 @@ let gMeme = {
     lines: [{
         txt: 'I Know!!',
         size: 20,
+        family: 'Arial',
         align: 'left',
         color: 'red',
         idx: 50,
@@ -41,6 +42,7 @@ let gMeme = {
     },{
         txt: 'you know!!',
         size: 50,
+        family: 'Arial',
         align: 'left',
         color: 'green',
         idx: 80,
@@ -48,6 +50,8 @@ let gMeme = {
     }
 ]
 };
+
+let gCurrLine = 0;
 
 const KEY = 'meme';
 let gSortBy;
@@ -58,23 +62,39 @@ function getImgToDisplay() {
     return imgs;
 }
 
-
-function getImgByIdx(imgIdx) {
-    let img = gImgs.find(function (img) {
-        console.log(imgIdx, img.id)
-        return imgIdx === img.id;
-    })
-    return img;
+function setCurImgIdx(idx) {
+    gMeme.selectedImgId = idx;
 }
 
+function setNewLine(txt){
+    gMeme.lines[gCurrLine].txt = txt;
+    clearCanvas();
+    drawTxt();
+}
+
+// function getImgByIdx(imgIdx) {
+//     let img = gImgs.find(function (img) {
+//         console.log(imgIdx, img.id)
+//         return imgIdx === img.id;
+//     })
+//     return img;
+// }
+
+function drawTxt(){
+    setTxtStyle();
+}
 
 function setTxtStyle(){
         gMeme.lines.forEach(function(line) {
-            gCtx.strokeStyle = 'black'; 
+            gCtx.strokeStyle = 'green'; 
             gCtx.font = `${line.size}px ${line.family}`;
+            console.log(gCtx.font);
             gCtx.fillStyle = line.color;
             gCtx.fillText(line.txt, line.x, line.y);
-            gCtx.strokeText(line.txt, line.x, line.y);
+            gCtx.strokeText(line.txt, line.idx, line.idy);
         })
-        console.log(gMeme)
+}
+
+function clearCanvas() {
+    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }

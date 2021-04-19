@@ -35,10 +35,10 @@
         </section>
         <section class="meme-editor container flex hide">
             <div class="canvas-container">
-                <canvas class="canvas" height="400" width="400" style="border: 1px solid black;"></canvas>
+                
             </div>
             <div class="edit-panel flex container">
-                <input type="text" name="wrute-meme" placeholder="enter your text" onchange="DrawTextOnCanvas(this.value)">
+                <input type="text" name="wrute-meme" placeholder="enter your text" onkeyup="DrawTextOnCanvas(this.value)">
                 <button>delete</button>
                 <button>font</button>
                 <button>align</button>
