@@ -5,17 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="img/favicon-32x32.png" type="image/png">
     <title>Meme Generator</title>
 </head>
 
 <!-- onresize="resizeCanvas()" -->
-<body onload="onInit()" >
+
+<body onload="onInit()">
     <header class="flex justify-center txt-capital">
         <nav class="links-container flex container">
-            <div onclick="ontoggleGallery()" class="logo-container pointer"><img src="img/LOGO.png" alt="meme logo"></div>
+            <div onclick="ontoggleGallery()" class="logo-container pointer"><img src="img/LOGO.png" alt="meme logo">
+            </div>
             <ul class="nav-links flex align-center list-style">
                 <li class="pointer" onclick="ontoggleGallery()"><a class="link-style" href="#">gallery</a></li>
                 <li class="pointer"><a class="link-style" href="#">about</a></li>
@@ -35,10 +38,11 @@
         </section>
         <section class="meme-editor container flex hide">
             <div class="canvas-container">
-                <canvas class="canvas" height="400" width="400"></canvas>
+                <canvas class="canvas" height="500" width="500"></canvas>
             </div>
             <div class="edit-panel flex container">
-                <input class="txt-capital" type="text" name="write-meme" placeholder="enter your text" onkeyup="DrawTextOnCanvas(this.value)">
+                <input class="txt-capital" type="text" name="write-meme" placeholder="enter your text"
+                    onkeyup="DrawTextOnCanvas(this.value)">
                 <button class="btn pointer" onclick="clearCanvas()"><i class="fas fa-trash-alt"></i></button>
                 <select class="btn pointer txt-capital" name="fonts" onchange="onChangeFontFamily()">
                     <option value="Impact">Impact</option>
@@ -47,19 +51,23 @@
                 <button class="btn pointer"><i class="fas fa-align-left"></i></i></button>
                 <button class="btn pointer"><i class="fas fa-align-center"></i></button>
                 <button class="btn pointer"><i class="fas fa-align-right"></i></button>
-                <button class="btn pointer" onclick="onIncreaseFontSize()">A+</button>
-                <button class="btn pointer" onclick="onDecreaseFontSize()">A-</button>
-                <label class="pointer" for="color-picker">pic a color 
-                <input id="color-picker" type="color" name="font-size">
+                <button class="btn increase-font pointer" onclick="onIncreaseFontSize()">A+</button>
+                <button class="btn decrease-font pointer" onclick="onDecreaseFontSize()">A-</button>
+                <button class="btn move-up pointer" onmousedown="onMoveLineUp()">move line up</button>
+                <button class="btn move-down pointer" onmousedown="onMoveLineDown()">move line down</button>
+                <label class="pointer" for="color-picker">pic a color
+                    <input id="color-picker" type="color" name="font-size" onchange="onChangeColor(this.value)">
                 </label>
-                
+
                 <button class="btn txt-capital pointer" onclick="onMoveNxtLine()">next line</button>
-                
+
                 <button class="btn txt-capital pointer"><a onclick="downloadMeme(this)">download</a></button>
             </div>
         </section>
     </main>
-    <footer class="txt-capital flex justify-center"><h2>din ben elisha sprint 2</h2></footer>
+    <footer class="txt-capital flex justify-center">
+        <h2>din ben elisha sprint 2</h2>
+    </footer>
 
 
 

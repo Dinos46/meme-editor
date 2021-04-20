@@ -15,17 +15,21 @@ let gMeme = {
         size: 20,
         family: 'Arial',
         align: 'left',
-        color: 'red',
+        color: 'white',
+        stroke: 'black',
         idx: 80,
-        idy: 50
+        idy: 50,
+        isDragging: false
     }, {
         txt: 'you know!!',
         size: 50,
         family: 'Arial',
         align: 'left',
-        color: 'green',
+        color: 'white',
+        stroke: 'black',
         idx: 80,
-        idy: 250
+        idy: 250,
+        isDragging: false
     }]
 };
 
@@ -55,7 +59,6 @@ function setCurImgIdx(idx) {
 
 function setNewLine(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt;
-    
 }
 
 function setNewImg(imgId) {
@@ -67,9 +70,7 @@ function nextLine() {
         gMeme.selectedLineIdx = 0;
     } else {
         gMeme.selectedLineIdx += 1;
-
     }
-    console.log('gMeme.selectedLineIdx:', gMeme.selectedLineIdx);
 }
 
 function changeFontFamily(font) {
@@ -79,7 +80,6 @@ function changeFontFamily(font) {
 
 function updateMemeLine(line, val){
     line.txt = val;
-    console.log(gMeme)
 }
 
 function getCurrLine() {
@@ -95,16 +95,31 @@ function getCurrLine() {
 // }
 
 
+function setColor(color){
+    gMeme.lines[gMeme.selectedLineIdx].color = color;
+    drawTxt();
+}
+
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }
 
 function increaseFontSize() {
     gMeme.lines[gMeme.selectedLineIdx].size++;
-    // drawTxt();
+    drawTxt();
 }
 
 function decreaseFontSize() {
     gMeme.lines[gMeme.selectedLineIdx].size--;
-    // drawTxt();
+    drawTxt();
+}
+
+function moveLineUp(currLine){
+    currLine.idy -= 10;
+    drawTxt();
+}
+
+function moveLineDown(currLine){
+    currLine.idy += 10;
+    drawTxt();
 }

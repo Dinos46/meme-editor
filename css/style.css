@@ -92,6 +92,11 @@ main .content-container {
     width: 100%;
     justify-content: space-around;
 }
+
+/* .canvas-container {
+    flex: 2;
+} */
+
 .edit-panel {
     background-color: #19a59f;
     border: 2px solid;
@@ -121,6 +126,7 @@ main .content-container {
 footer {
     background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
     padding: 1rem;
+    margin-block-start: 1rem;
 }
 
 @media screen and (min-width: 600px) {
