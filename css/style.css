@@ -18,10 +18,11 @@ img {
     width: 100%;   
 }
 
+
 /*................ HEADER .........................*/
 header {
     background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 header .links-container {
@@ -29,15 +30,29 @@ header .links-container {
 }
 
 header .logo-container {
-    width: 10%;
+    max-width: 30%;
 }
 
 header ul.nav-links {
     justify-content: space-around;
 }
 
-ul.nav-links li:not(:last-child) {
+ul.nav-links li {
     padding-inline-end: 1.5rem;
+    margin-inline-end: 0.5rem;
+}
+
+
+ul.nav-links li a {
+    padding: 0 1rem;
+}
+
+ul.nav-links li a:hover,
+ul.nav-links li a:focus {
+    background-color: #fefefe;
+    color: #21ac91;
+    border-radius: 1rem;
+    transition: ease-in-out 0.2s;
 }
 
 /*.................. MAIN..............  */
@@ -53,6 +68,24 @@ main .content-container {
     
 }
 
+.user-panel {
+    justify-content: space-evenly;
+    margin-block-start: 0.5rem;
+}
+
+.user-panel > * {
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+.user-panel input[name="search-bar"] {
+    flex: 2;
+}
+
+.user-panel input[name="search-bar"]::after {
+    content: "🔎";
+}
+
 
 /*............... MEME-EDITOR ................... */
 .meme-editor {
@@ -60,6 +93,7 @@ main .content-container {
     justify-content: space-around;
 }
 .edit-panel {
+    background-color: #19a59f;
     border: 2px solid;
     flex-direction: column;
     padding: 0.5rem;
@@ -72,8 +106,24 @@ main .content-container {
 .edit-panel input[name="font-size"],
 .edit-panel label[for="color-picker"] {
     align-self: center;
+    
 }
 
-.canvas-container {
-    background: #fff;
+.edit-panel input[name="write-meme"] {
+    border-radius: 2rem;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    border: none;
+}
+
+/*........................... FOOTER ....................... */
+footer {
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    padding: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+
+
 }

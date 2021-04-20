@@ -1,44 +1,48 @@
 'use strict';
 
-let gCanvas;
-let gCtx;
+var gCanvas;
+var gCtx;
 
 
 function onInit() {
+    gCanvas = document.querySelector('.canvas');
+    gCtx = gCanvas.getContext('2d');
     renderGalery();
 }
 
 function renderGalery() {
     let imgs = getImgToDisplay();
+
     let imgStrHtml = imgs.map(function (img) {
-        return `<div  onclick="renderMemeEditor(${img.id})" class="card">
+        return `<div onclick="renderMemeEditor(${img.id})" class="card pointer">
         <img src="${img.url}">
         </div>`;
     }).join('');
     const elGallery = document.querySelector('.gallery');
     elGallery.innerHTML = imgStrHtml;
+    const elKeyWords = document.querySelector('.key-words');
 
 }
 
 function renderMemeEditor(idx) {
-    renderCanvas();
+    ontoggleGallery();
     setCurImgIdx(idx);
+    setNewImg(idx)
     drawImgOnCanvas(idx);
 }
 
-function renderCanvas(){
-    let strHtml = `<canvas class="canvas" height="400" width="400"></canvas>`;
-    const elCanvas = document.querySelector('.canvas-container');
-    elCanvas.innerHTML = strHtml;
-    gCanvas = document.querySelector('.canvas');
-    gCtx = gCanvas.getContext('2d');
-    ontoggleGallery();
-    
+function renderCanvas(imgId) {
+    drawImgOnCanvas(imgId)
+    setTimeout(function(){
+        drawTxt();
+    },20)
 }
 
 
 function DrawTextOnCanvas(txt) {
-    setNewLine(txt);
+    let currLine = getCurrLine();
+    updateMemeLine(currLine, txt);
+    renderCanvas(gMeme.selectedImgId);
 }
 
 function ontoggleGallery() {
@@ -49,19 +53,27 @@ function ontoggleGallery() {
 }
 
 function downloadMeme(elLink) {
-    const data = gCanvas.toDataURL()
-    elLink.href = data
-    elLink.download = 'my-meme.jpg'
+    const data = gCanvas.toDataURL();
+    elLink.href = data;
+    elLink.download = 'my-meme.jpg';
+}
+
+function drawTxt() {
+    let line = getCurrLine();
+    gCtx.strokeStyle = 'green';
+    gCtx.font = `${line.size}px ${line.family}`;
+    gCtx.fillStyle = line.color;
+    gCtx.fillText(line.txt, line.x, line.y);
+    gCtx.strokeText(line.txt, line.idx, line.idy);
 }
 
 
-
-function drawImgOnCanvas(idx) {
-    var img = new Image()
-    img.src = `./img/${idx}.jpg`;
+function drawImgOnCanvas(id) {
+    var img = new Image();
+    img.src = `./img/${id}.jpg`;
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-        drawTxt();
+        
     }
 }
 
@@ -70,3 +82,22 @@ function resizeCanvas() {
     gCanvas.width = elContainer.offsetWidth
     gCanvas.height = elContainer.offsetHeight
 }
+
+
+    function onMoveNxtLine() {
+        nextLine()
+        document.querySelector('input[name="write-meme"]').placeholder = getCurrLine().txt;
+    }
+    
+    function onChangeFontFamily() {
+        let font = document.querySelector('select[name="fonts"]').value;
+        changeFontFamily(font);
+    }
+    
+    function onIncreaseFontSize() {
+        increaseFontSize();
+    }
+    
+    function onDecreaseFontSize() {
+        decreaseFontSize();
+    }

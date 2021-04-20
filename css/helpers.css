@@ -31,3 +31,32 @@
 .hide {
     display: none;
 }
+
+.txt-capital {
+    text-transform: capitalize;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.btn {
+    border-radius: 2rem;
+    padding: 0.2rem;
+    background-color: #ebeef3;
+    outline: none;
+    border: none;
+    color: #000;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: #fefefe;
+    color: #21ac91;
+    transition: ease-in-out 0.2s;
+}
+
+.link-style {
+    text-decoration: none;
+    color: #ebeef3;
+}
