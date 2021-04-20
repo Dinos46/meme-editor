@@ -15,6 +15,7 @@
 <!-- onresize="resizeCanvas()" -->
 
 <body onload="onInit()">
+    <div class="overlay-filter hide"></div>
     <header class="flex justify-center txt-capital">
         <nav class="links-container flex container">
             <div onclick="ontoggleGallery()" class="logo-container pointer"><img src="img/LOGO.png" alt="meme logo">
@@ -23,6 +24,11 @@
                 <li class="pointer" onclick="ontoggleGallery()"><a class="link-style" href="#">gallery</a></li>
                 <li class="pointer"><a class="link-style" href="#">about</a></li>
             </ul>
+            <div onclick="onOpenHamburgerMenu(this)" class="hamburger-menu pointer"><i class="fas fa-bars"></i></div>
+            <!-- <div class="drop-down-menu hide">
+                <div onclick="ontoggleGallery()" class="gallery pointer"><a href="#">gallery</a></div>
+                <div class="about pointer"><a href="#">about</a></div>
+             </div> -->
         </nav>
     </header>
     <main class="flex align-center txt-capital">
@@ -30,7 +36,7 @@
             <div class="user-panel flex">
                 <input class="pointer" type="search" name="search-bar" placeholder="search">
                 <span class="key-words"></span>
-                <button class="btn pointer">more</button>
+                <button class="btn more pointer">more</button>
             </div>
             <section class="gallery grid">
                 <!----------------- RENDER CONTENT FROM JAVASCRIPT ----------->
@@ -38,11 +44,14 @@
         </section>
         <section class="meme-editor container flex hide">
             <div class="canvas-container">
-                <canvas class="canvas" height="500" width="500"></canvas>
+                <canvas class="canvas" height="400" width="400"></canvas>
             </div>
-            <div class="edit-panel flex container">
+            <div class="edit-panel flex">
+
                 <input class="txt-capital" type="text" name="write-meme" placeholder="enter your text"
                     onkeyup="DrawTextOnCanvas(this.value)">
+
+
                 <button class="btn pointer" onclick="clearCanvas()"><i class="fas fa-trash-alt"></i></button>
                 <select class="btn pointer txt-capital" name="fonts" onchange="onChangeFontFamily()">
                     <option value="Impact">Impact</option>
@@ -62,6 +71,7 @@
                 <button class="btn txt-capital pointer" onclick="onMoveNxtLine()">next line</button>
 
                 <button class="btn txt-capital pointer"><a onclick="downloadMeme(this)">download</a></button>
+
             </div>
         </section>
     </main>

@@ -1,5 +1,8 @@
 @import "./helpers.css";
 @import "./typography.css";
+@import "./header.css";
+@import "./gallery.css";
+@import "./footer.css";
 
 * {
     box-sizing: border-box;
@@ -15,48 +18,18 @@ body {
 }
 
 img {
-    width: 100%;   
+    width: 100%;
 }
 
-
-/*................ HEADER .........................*/
-header {
-    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
-    padding: 1rem;
-}
-
-header .links-container {
-    justify-content: space-between;
-}
-
-header .logo-container {
-    max-width: 30%;
-}
-
-header ul.nav-links {
-    justify-content: space-around;
-}
-
-ul.nav-links li {
-    padding-inline-end: 1.5rem;
-    margin-inline-end: 0.5rem;
-}
-
-
-ul.nav-links li a {
-    padding: 0 1rem;
-}
-
-ul.nav-links li a:hover,
-ul.nav-links li a:focus {
-    background-color: #fefefe;
-    color: #21ac91;
-    border-radius: 1rem;
-    transition: ease-in-out 0.2s;
+.overlay-filter {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
 }
 
 /*.................. MAIN..............  */
-/*................... GALLERY .............................. */
+
 main {
     flex-direction: column;
     padding-block-start: 1.5rem;
@@ -65,27 +38,8 @@ main {
 main .content-container {
     background-color: #383b42;
     width: 100%;
-    
-}
 
-.user-panel {
-    justify-content: space-evenly;
-    margin-block-start: 0.5rem;
 }
-
-.user-panel > * {
-    border-radius: 1rem;
-    padding: 0.5rem;
-}
-
-.user-panel input[name="search-bar"] {
-    flex: 2;
-}
-
-.user-panel input[name="search-bar"]::after {
-    content: "🔎";
-}
-
 
 /*............... MEME-EDITOR ................... */
 .meme-editor {
@@ -93,25 +47,22 @@ main .content-container {
     justify-content: space-around;
 }
 
-/* .canvas-container {
-    flex: 2;
-} */
-
 .edit-panel {
     background-color: #19a59f;
     border: 2px solid;
     flex-direction: column;
     padding: 0.5rem;
+    margin-inline-start: 0.5rem;
 }
 
-.edit-panel > *:not(:first-child) {
+.edit-panel>*:not(:first-child) {
     margin-block-start: 1rem;
 }
 
 .edit-panel input[name="font-size"],
 .edit-panel label[for="color-picker"] {
     align-self: center;
-    
+
 }
 
 .edit-panel input[name="write-meme"] {
@@ -122,14 +73,41 @@ main .content-container {
     border: none;
 }
 
-/*........................... FOOTER ....................... */
-footer {
-    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
-    padding: 1rem;
-    margin-block-start: 1rem;
-}
+/*...................... SMALL SCREEN ....................... */
+@media screen and (max-width: 660px) {
 
-@media screen and (min-width: 600px) {
+    header nav.links-container ul {
+        display: none;
+    }
 
+    header nav.links-container .hamburger-menu {
+        display: block;
+    }
+
+    .drop-down-menu {
+        position: fixed;
+        background-color: black;
+        height: 100vh;
+        right: 3%;
+        top: 89px;
+        width: 70%;
+    }
+
+    .meme-editor {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .edit-panel {
+        align-items: baseline;
+        margin-inline-start: 0.5rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .edit-panel>* {
+        padding: 0.5rem;
+    }
 
 }

@@ -1,0 +1,23 @@
+/*................... GALLERY .............................. */
+.user-panel {
+    justify-content: space-evenly;
+    margin: 0.5rem 1rem;
+}
+
+.user-panel>* {
+    border-radius: 1rem;
+    padding: 0.6rem 1rem;
+}
+
+.user-panel button.more {
+    color: #fefefe;
+    background: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+}
+
+.user-panel input[name="search-bar"] {
+    flex: 2;
+}
+
+.user-panel input[name="search-bar"]::after {
+    content: "🔎";
+}

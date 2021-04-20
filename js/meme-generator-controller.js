@@ -62,7 +62,7 @@ function onDown(ev) {
 
 //         gMeme.idx += dx;
 //         gMeme.idy += dy;
-        
+
 //         gStartPos = pos
 //         renderCanvas()
 //         renderCircle()
@@ -75,7 +75,7 @@ function onDown(ev) {
 // }
 
 // function isLineClicked(clickedPos) {
-    
+
 //     console.log()
 //     const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
 //     return distance <= gCircle.size
@@ -116,7 +116,7 @@ function downloadMeme(elLink) {
 }
 
 function drawTxt() {
-    gMeme.lines.forEach(function(line) {
+    gMeme.lines.forEach(function (line) {
         gCtx.font = `${line.size}px ${line.family}`;
         gCtx.strokeStyle = `${line.color}`;
         gCtx.fillStyle = `${line.color}`;
@@ -125,8 +125,17 @@ function drawTxt() {
     })
 }
 
+function onOpenHamburgerMenu(elBtn) {
+    const xSign = `<i class="fas fa-times"></i>`;
+    const hamburgerSign = `<i class="fas fa-bars"></i>`;
+    elBtn.innerHTML = (elBtn.innerHTML === hamburgerSign) ? xSign : hamburgerSign;
+    const elDropDown = document.querySelector('.drop-down-menu');
+    elDropDown.classList.toggle('hide');
+    elDropDown.classList.toggle('flex');
+    elOverLay.classList.toggle('hide');
+}
 
-function onChangeColor(color){
+function onChangeColor(color) {
     setColor(color);
     renderCanvas();
 }
@@ -169,13 +178,13 @@ function onDecreaseFontSize() {
 }
 
 
-function onMoveLineUp(){
+function onMoveLineUp() {
     let currLine = getCurrLine();
     moveLineUp(currLine);
     // renderCanvas();
 }
 
-function onMoveLineDown(){
+function onMoveLineDown() {
     let currLine = getCurrLine();
     moveLineDown(currLine);
     // renderCanvas();

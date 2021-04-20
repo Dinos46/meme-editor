@@ -1,0 +1,11 @@
+/*........................... FOOTER ....................... */
+footer {
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    padding: 1rem;
+    margin-block-start: 1rem;
+}
+
+.fa-times,
+.fa-bars {
+    font-size: 2rem;
+}
