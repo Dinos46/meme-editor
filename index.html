@@ -47,7 +47,7 @@
         </section>
         <section class="content-container container flex">
             <div class="user-panel flex">
-                <input onkeyup="onSearch(this.value)" class="pointer" type="search" name="search-bar" placeholder="search">
+                <input class="pointer" type="search" name="search-bar" placeholder="search">
                 <button class="btn more pointer">more</button>
             </div>
             <span class="key-words"></span>
@@ -55,7 +55,7 @@
                 <!----------------- RENDER CONTENT FROM JAVASCRIPT ----------->
             </section>
         </section>
-        <section class="meme-editor container flex">
+        <section class="meme-editor container flex hide">
             <div class="canvas-container">
                 <canvas class="canvas" height="400" width="400"></canvas>
             </div>
@@ -92,9 +92,6 @@
     <footer class="txt-capital flex justify-center">
         <h2>din ben elisha sprint 2</h2>
     </footer>
-
-
-
 
     <script src="js/util-service.js"></script>
     <script src="js/storage-service.js"></script>
