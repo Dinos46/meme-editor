@@ -3,6 +3,7 @@
 var gCanvas;
 var gCtx;
 var gTouchEvs = ['touchmove', 'touchstart', 'touchend'];
+
 //................ ACTIVES FROM DOM, AFTER DOM LOADS ........//
 function onInit() {
     gCanvas = document.querySelector('.canvas');
@@ -22,7 +23,10 @@ function renderGalery() {
     const elGallery = document.querySelector('.gallery');
     elGallery.innerHTML = imgStrHtml;
     const elKeyWords = document.querySelector('.key-words');
-
+    let strHtml = gKeyWordsList.map(word => {
+       return `<span class="pointer">${word} </span>`;
+    }).join('');
+    elKeyWords.innerHTML = strHtml;
 }
 
 function searchKeyWord(keyWord) {
@@ -78,8 +82,6 @@ function drawImgOnCanvas(id) {
         // resizeCanvas();
     }
 }
-
-//....... ADD EVENT LISINERS FOR DRAG AND DROP ..........//
 
 //......... FIT CANVAS TO THE CONTAINER ......//
 function resizeCanvas() {
@@ -162,6 +164,28 @@ function onDrawTextOnCanvas(txt) {
 function onDecreaseFontSize() {
     decreaseFontSize();
     renderCanvas();
+}
+
+function onSaveToTab(){
+    const data = gCanvas.toDataURL();
+
+    saveUserMeme(gMeme, data);
+}
+
+function renderUserTab(){
+    let userMeme = getUserSaveMeme();
+    if(!userMeme) return;
+    const elImg = document.querySelector('.img-container');
+    const elUserTab = document.querySelector('.uesr-save-tab');
+    elUserTab.classList.toggle('hide');
+    let strHtml = userMeme.map(data => {
+        return `<img class="meme" src="${data}">`;
+    }).join('');
+    elImg.innerHTML = strHtml;
+}
+
+function onCloseTab(){
+
 }
 
 function onMoveLineUp() {

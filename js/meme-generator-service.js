@@ -1,7 +1,8 @@
 'use strict';
 
 //...KEY TO SAVE IN LOCAL STORAGE...........//
-const KEY = 'meme';
+const MEMEKEY = 'meme';
+const IMGKEY = 'img';
 
 //............IMAGES ARRAY GLOBAL ..........//
 let gImgs = _createImgs();
@@ -35,9 +36,21 @@ let gMeme = {
     }]
 };
 
-let gUserSavedMems = [
+let gUserSavedMems = [];
+var gUserSavedImgs = [];
 
-]
+function saveUserMeme(userMeme, imgData){
+    gUserSavedImgs.push(imgData);
+    gUserSavedMems.push(userMeme);
+    saveToStorage(MEMEKEY, gUserSavedMems);
+    saveToStorage(IMGKEY, gUserSavedImgs);
+}
+
+function getUserSaveMeme(){
+    let userMeme = loadFromStorage(IMGKEY);
+    return userMeme;
+}
+
 
 
 let gKeywords = {

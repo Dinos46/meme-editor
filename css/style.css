@@ -38,9 +38,14 @@ main {
 main .content-container {
     background-color: #383b42;
     width: 100%;
-
+    flex-direction: column;
 }
 
+.key-words {
+    flex: 1;
+    font-size: 1rem;
+    align-self: center;
+}
 /*............... MEME-EDITOR ................... */
 .meme-editor {
     width: 100%;
@@ -71,6 +76,17 @@ main .content-container {
     text-align: center;
     outline: none;
     border: none;
+}
+
+.uesr-save-tab {
+    margin-block-start: 1rem;
+    padding: 1rem;
+    flex-direction: column;
+    width: 100%;
+}
+
+.uesr-save-tab .close-tab{
+    padding: 0 1rem;
 }
 
 /*...................... SMALL SCREEN ....................... */
