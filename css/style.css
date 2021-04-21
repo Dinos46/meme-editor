@@ -86,11 +86,33 @@ main .content-container {
 
     .drop-down-menu {
         position: fixed;
-        background-color: black;
         height: 100vh;
-        right: 3%;
-        top: 89px;
+        left: 100%;
+        top: 8%;
         width: 70%;
+        animation: right-to-left 1s ease-in forwards;
+    }
+    
+    .drop-down-menu .nav-links {
+        flex-direction: column;
+        margin-block-start: 1rem;
+        height: 20%;
+        width: 100%;
+    }
+    
+    .drop-down-menu .nav-links li {
+        margin-block-start: 1rem;
+        background: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1rem;
+    }
+
+    .hamburger-menu {
+        display: flex;
     }
 
     .meme-editor {
@@ -108,6 +130,12 @@ main .content-container {
 
     .edit-panel>* {
         padding: 0.5rem;
+    }
+
+    @keyframes right-to-left {
+        100%{
+            left: 30%;
+        }
     }
 
 }

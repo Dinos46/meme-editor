@@ -1,12 +1,12 @@
 'use strict';
 
-let gKeywords = {
-    'happy': 12,
-    'funny puk': 1
-};
+//...KEY TO SAVE IN LOCAL STORAGE...........//
+const KEY = 'meme';
 
-let gImgs = createImgs();
+//............IMAGES ARRAY GLOBAL ..........//
+let gImgs = _createImgs();
 
+//.... EHCH MEME LINES THE USER EDITS ........//
 let gMeme = {
     selectedImgId: 7,
     selectedLineIdx: 0,
@@ -17,6 +17,7 @@ let gMeme = {
         align: 'left',
         color: 'white',
         stroke: 'black',
+        txtAlign: 'center',
         idx: 80,
         idy: 50,
         isDragging: false
@@ -27,6 +28,7 @@ let gMeme = {
         align: 'left',
         color: 'white',
         stroke: 'black',
+        txtAlign: 'center',
         idx: 80,
         idy: 250,
         isDragging: false
@@ -34,43 +36,61 @@ let gMeme = {
 };
 
 
-function createImgs(){
-    let imgs = [];
-    for(let i = 0; i < 18; i++){
-    let img = {id: i+1, url: `img/${i+1}.jpg`, keywords: ['happy']}
-    imgs.push(img)
+let gKeywords = {
+    'happy': 12,
+    'funny puk': 1
+};
+
+//...... KEY WORDS TO APPLY IN IMG KYWORDS ARRAY ............//
+var gKeyWordsList = ['happy', 'funny', 'angry', 'cute', 'sleepy'];
+
+
+//........MAKE THE IMGAGES ARRAY TO RENDER ..............//
+function _createImgs() {
+    let imgsArray = [];
+
+    for (let i = 0; i < 18; i++) {
+        // let randomKeyWord = gKeyWordsList[getRandomInt(0, gKeyWordsList.length-1)];
+        let img = {
+            id: i + 1,
+            url: `img/${i+1}.jpg`,
+            keywords: []
+        }
+        imgsArray.push(img);
     }
-    return imgs;
+    return imgsArray;
 }
 
-const KEY = 'meme';
-let gSortBy;
+//  console.log()
+// function getRandomKeyWord() {
+//     let randNum = ;
+//     console.log(randNum);
+//     return ;
+// }
 
 
-function getImgToDisplay() {
-    let imgs = gImgs;
-    return imgs;
+// function removeLine() {
+//     if (!gMeme.lines) return;
+//     getCurrLine()
+// }
+
+//....... GET THE CUURENT LINE TXT THE USER EDITS .........//
+function getCurrLine() {
+    return gMeme.lines[gMeme.selectedLineIdx];
 }
 
+//...................... UPDATE MODEL FUNCTIONS ...............//
 function setCurImgIdx(idx) {
     gMeme.selectedImgId = idx;
 }
-
 
 function setNewLine(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
-function setNewImg(imgId) {
-    gMeme.selectedImgId = imgId;
-}
-
 function nextLine() {
-    if (gMeme.selectedLineIdx === gMeme.lines.length - 1) {
-        gMeme.selectedLineIdx = 0;
-    } else {
-        gMeme.selectedLineIdx += 1;
-    }
+    console.log(gMeme.selectedLineIdx)
+    gMeme.selectedLineIdx = (gMeme.selectedLineIdx === gMeme.lines.length - 1) ? 0 : gMeme.selectedLineIdx + 1;
 }
 
 function changeFontFamily(font) {
@@ -78,30 +98,28 @@ function changeFontFamily(font) {
     drawTxt();
 }
 
-function updateMemeLine(line, val){
-    line.txt = val;
-}
-
-function getCurrLine() {
-    return gMeme.lines[gMeme.selectedLineIdx];
-}
-
-// function getImgByIdx(imgIdx) {
-//     let img = gImgs.find(function (img) {
-//         console.log(imgIdx, img.id)
-//         return imgIdx === img.id;
-//     })
-//     return img;
-// }
-
-
-function setColor(color){
-    gMeme.lines[gMeme.selectedLineIdx].color = color;
+function setTxtAlign(txtAlign) {
+    switch (txtAlign) {
+        case 'center':
+            gMeme.lines[gMeme.selectedLineIdx].txtAlign = 'center';
+            break
+        case 'right':
+            gMeme.lines[gMeme.selectedLineIdx].txtAlign = 'right';
+            break
+        case 'left':
+            gMeme.lines[gMeme.selectedLineIdx].txtAlign = 'left';
+            break
+    }
     drawTxt();
 }
 
-function clearCanvas() {
-    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+function updateMemeLine(line, val) {
+    line.txt = val;
+}
+
+function setColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].color = color;
+    drawTxt();
 }
 
 function increaseFontSize() {
@@ -114,12 +132,12 @@ function decreaseFontSize() {
     drawTxt();
 }
 
-function moveLineUp(currLine){
+function moveLineUp(currLine) {
     currLine.idy -= 10;
     drawTxt();
 }
 
-function moveLineDown(currLine){
+function moveLineDown(currLine) {
     currLine.idy += 10;
     drawTxt();
 }

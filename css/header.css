@@ -16,10 +16,6 @@ header ul.nav-links {
     justify-content: space-around;
 }
 
-header nav.links-container .hamburger-menu {
-    display: none;
-}
-
 ul.nav-links li {
     padding-inline-end: 1.5rem;
     margin-inline-end: 0.5rem;
