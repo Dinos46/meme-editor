@@ -18,7 +18,7 @@ let gMeme = {
         color: 'white',
         stroke: 'black',
         txtAlign: 'center',
-        idx: 80,
+        idx: 200,
         idy: 50,
         isDragging: false
     }, {
@@ -29,11 +29,15 @@ let gMeme = {
         color: 'white',
         stroke: 'black',
         txtAlign: 'center',
-        idx: 80,
-        idy: 250,
+        idx: 200,
+        idy: 300,
         isDragging: false
     }]
 };
+
+let gUserSavedMems = [
+
+]
 
 
 let gKeywords = {
@@ -89,7 +93,6 @@ function setNewLine(txt) {
 }
 
 function nextLine() {
-    console.log(gMeme.selectedLineIdx)
     gMeme.selectedLineIdx = (gMeme.selectedLineIdx === gMeme.lines.length - 1) ? 0 : gMeme.selectedLineIdx + 1;
 }
 
