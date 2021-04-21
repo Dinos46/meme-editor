@@ -13,7 +13,7 @@ let gMeme = {
     selectedLineIdx: 0,
     lines: [{
         txt: 'I Know!!',
-        size: 20,
+        size: 50,
         family: 'Arial',
         align: 'left',
         color: 'white',
@@ -37,21 +37,7 @@ let gMeme = {
 };
 
 let gUserSavedMems = [];
-var gUserSavedImgs = [];
-
-function saveUserMeme(userMeme, imgData){
-    gUserSavedImgs.push(imgData);
-    gUserSavedMems.push(userMeme);
-    saveToStorage(MEMEKEY, gUserSavedMems);
-    saveToStorage(IMGKEY, gUserSavedImgs);
-}
-
-function getUserSaveMeme(){
-    let userMeme = loadFromStorage(IMGKEY);
-    return userMeme;
-}
-
-
+let gUserSavedImgs = [];
 
 let gKeywords = {
     'happy': 12,
@@ -59,36 +45,33 @@ let gKeywords = {
 };
 
 //...... KEY WORDS TO APPLY IN IMG KYWORDS ARRAY ............//
-var gKeyWordsList = ['happy', 'funny', 'angry', 'cute', 'sleepy'];
-
+let gKeyWordsList = ['happy', 'funny', 'angry', 'cute', 'sleepy'];
 
 //........MAKE THE IMGAGES ARRAY TO RENDER ..............//
 function _createImgs() {
-    let imgsArray = [];
-
+    let imgs = [];
     for (let i = 0; i < 18; i++) {
-        // let randomKeyWord = gKeyWordsList[getRandomInt(0, gKeyWordsList.length-1)];
         let img = {
             id: i + 1,
             url: `img/${i+1}.jpg`,
-            keywords: []
+            keywords: ['funny']
         }
-        imgsArray.push(img);
+        imgs.push(img);
     }
-    return imgsArray;
+    return imgs;
 }
 
-//  console.log()
-// function getRandomKeyWord() {
-//     let randNum = ;
-//     console.log(randNum);
-//     return ;
+// setRandomKeyWord();
+// function setRandomKeyWord() {
+//     let imgs = _createImgs();
+//     imgs.forEach(img => {
+//         img.keywords[0] = getRandKeyWord();
+//     })
 // }
 
-
-// function removeLine() {
-//     if (!gMeme.lines) return;
-//     getCurrLine()
+// function getRandKeyWord(){
+//     let keyWord = gKeyWordsList[getRandomInt(0, gKeyWordsList.length-1)];
+//     return keyWord;
 // }
 
 //....... GET THE CUURENT LINE TXT THE USER EDITS .........//
@@ -156,4 +139,18 @@ function moveLineUp(currLine) {
 function moveLineDown(currLine) {
     currLine.idy += 10;
     drawTxt();
+}
+
+//...................... SAVE USER MEMES TO LOCAL STORAGE .................//
+function saveUserMeme(userMeme, imgData) {
+    gUserSavedImgs.push(imgData);
+    gUserSavedMems.push(userMeme);
+    saveToStorage(MEMEKEY, gUserSavedMems);
+    saveToStorage(IMGKEY, gUserSavedImgs);
+}
+
+//................... GETS USER MEMES FROM LOCAL STORAGE ...............////
+function getUserSaveMeme() {
+    let userMeme = loadFromStorage(IMGKEY);
+    return userMeme;
 }

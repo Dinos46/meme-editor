@@ -17,7 +17,3 @@
 .user-panel input[name="search-bar"] {
     flex: 2;
 }
-
-.user-panel input[name="search-bar"]::after {
-    content: "🔎";
-}

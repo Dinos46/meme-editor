@@ -1,8 +1,8 @@
 'use strict';
 
-var gCanvas;
-var gCtx;
-var gTouchEvs = ['touchmove', 'touchstart', 'touchend'];
+let gCanvas;
+let gCtx;
+let gTouchEvs = ['touchmove', 'touchstart', 'touchend'];
 
 //................ ACTIVES FROM DOM, AFTER DOM LOADS ........//
 function onInit() {
@@ -24,7 +24,7 @@ function renderGalery() {
     elGallery.innerHTML = imgStrHtml;
     const elKeyWords = document.querySelector('.key-words');
     let strHtml = gKeyWordsList.map(word => {
-       return `<span class="pointer">${word} </span>`;
+        return `<span class="pointer">${word} </span>`;
     }).join('');
     elKeyWords.innerHTML = strHtml;
 }
@@ -127,6 +127,13 @@ function onToggleOvelay() {
     elOverLay.classList.toggle('hide');
 }
 
+function onSearch(inputVal) {
+    gImgs.filter(img => {
+       return img.keywords.includes(inputVal);
+    })
+    renderCanvas();
+}
+
 // ................. EVENTS FROM MEME EDITOR ...........//
 function onChangeColor(color) {
     setColor(color);
@@ -166,15 +173,14 @@ function onDecreaseFontSize() {
     renderCanvas();
 }
 
-function onSaveToTab(){
+function onSaveToTab() {
     const data = gCanvas.toDataURL();
-
     saveUserMeme(gMeme, data);
 }
 
-function renderUserTab(){
+function renderUserTab() {
     let userMeme = getUserSaveMeme();
-    if(!userMeme) return;
+    if (!userMeme) return;
     const elImg = document.querySelector('.img-container');
     const elUserTab = document.querySelector('.uesr-save-tab');
     elUserTab.classList.toggle('hide');
@@ -182,10 +188,8 @@ function renderUserTab(){
         return `<img class="meme" src="${data}">`;
     }).join('');
     elImg.innerHTML = strHtml;
-}
-
-function onCloseTab(){
-
+    // if(window.innerWidth <= 600)
+    // onOpenHamburgerMenu();
 }
 
 function onMoveLineUp() {
@@ -213,7 +217,7 @@ function onDown(ev) {
     let x = pos.x - line.top;
     let y = pos.y - line.left;
     console.log('out')
-    if(!isLineClicked(x, y)) return;
+    if (!isLineClicked(x, y)) return;
     console.log('in')
     gMeme.lines[gMeme.selectedLineIdx].isDragging = true;
     gMeme.lines[gMeme.selectedLineIdx].idx = pos.x;
@@ -242,11 +246,10 @@ function isLineClicked(xPos, yPos) {
     let linePosy = getCurrLine().idy;
     console.log(linePosx, linePosy)
     const distance = Math.sqrt(
-        (xPos - linePosx) 
-        +
+        (xPos - linePosx) +
         (yPos - linePosy))
-        let lineHeight = (gMeme.lines[gMeme.selectedLineIdx].size * 1.25);
-        console.log();
+    let lineHeight = (gMeme.lines[gMeme.selectedLineIdx].size * 1.25);
+    console.log();
     return distance <= lineHeight;
 }
 
