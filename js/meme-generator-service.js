@@ -94,7 +94,6 @@ function nextLine() {
 
 function changeFontFamily(font) {
     gMeme.lines[gMeme.selectedLineIdx].family = font;
-    drawTxt();
 }
 
 function setTxtAlign(txtAlign) {
@@ -109,7 +108,6 @@ function setTxtAlign(txtAlign) {
             gMeme.lines[gMeme.selectedLineIdx].txtAlign = 'left';
             break
     }
-    drawTxt();
 }
 
 function updateMemeLine(line, val) {
@@ -118,27 +116,22 @@ function updateMemeLine(line, val) {
 
 function setColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color;
-    drawTxt();
 }
 
 function increaseFontSize() {
     gMeme.lines[gMeme.selectedLineIdx].size++;
-    drawTxt();
 }
 
 function decreaseFontSize() {
     gMeme.lines[gMeme.selectedLineIdx].size--;
-    drawTxt();
 }
 
 function moveLineUp(currLine) {
     currLine.idy -= 10;
-    drawTxt();
 }
 
 function moveLineDown(currLine) {
     currLine.idy += 10;
-    drawTxt();
 }
 
 //...................... SAVE USER MEMES TO LOCAL STORAGE .................//

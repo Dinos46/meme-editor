@@ -2,6 +2,7 @@
 
 let gCanvas;
 let gCtx;
+let gStPos;
 let gTouchEvs = ['touchmove', 'touchstart', 'touchend'];
 
 //................ ACTIVES FROM DOM, AFTER DOM LOADS ........//
@@ -15,8 +16,9 @@ function onInit() {
 //.......... DISPLAY IMAGES FROM GLOBAL TO THE DOM ...........// 
 function renderGalery() {
     let imgs = gImgs;
-    let imgStrHtml = imgs.map(function (img) {
-        return `<div onclick="renderMemeEditor(${img.id})" class="card pointer">
+    let imgStrHtml = imgs.map(img => {
+        return `
+        <div onclick="renderMemeEditor(${img.id})" class="card pointer">
         <img src="${img.url}">
         </div>`;
     }).join('');
@@ -24,20 +26,21 @@ function renderGalery() {
     elGallery.innerHTML = imgStrHtml;
     const elKeyWords = document.querySelector('.key-words');
     let strHtml = gKeyWordsList.map(word => {
-        return `<span class="pointer">${word} </span>`;
+        return `
+        <span class="pointer">${word}</span>`;
     }).join('');
     elKeyWords.innerHTML = strHtml;
 }
 
-function searchKeyWord(keyWord) {
-    let copyArray = gImgs;
-    let filterArray = gImgs.than(imgsArray => {
-        imgsArray.filter(imgs => imgs.keywords == keyWord)
-    })
-    console.log('3333', filterArray);
-    gImgs = filterArray;
-    renderGalery();
-}
+// function searchKeyWord(keyWord) {
+//     let copyArray = gImgs;
+//     let filterArray = gImgs.than(imgsArray => {
+//         imgsArray.filter(imgs => imgs.keywords == keyWord)
+//     })
+//     console.log('3333', filterArray);
+//     gImgs = filterArray;
+//     renderGalery();
+// }
 
 function renderMemeEditor(idx) {
     ontoggleGallery();
@@ -48,13 +51,12 @@ function renderMemeEditor(idx) {
 //..... DISPLAY TEXT AND SELECTED IMAGE ON CANVAS......//
 function renderCanvas() {
     drawImgOnCanvas(gMeme.selectedImgId);
-    setTimeout(function () {
-        drawTxt();
-    }, 20)
+    setTimeout(drawTxt, 20);
 }
+
 //....DRAW TXT ON CANVAS.......//
 function drawTxt() {
-    gMeme.lines.forEach(function (line) {
+    gMeme.lines.forEach(line => {
         gCtx.beginPath();
         gCtx.strokeStyle = `${line.color}`;
         gCtx.font = `${line.size}px ${line.family}`;
@@ -62,9 +64,6 @@ function drawTxt() {
         gCtx.fillStyle = `${line.color}`;
         gCtx.fillText(line.txt, line.idx, line.idy);
         gCtx.strokeText(line.txt, line.idx, line.idy);
-        let txtWidth = gCtx.measureText(line.txt).width;
-        let lineHeight = line.size * 1.25;
-        // gCtx.strokeRect(line.idx - txtWidth / 2 - 10, line.idy - lineHeight + 10, txtWidth + 20, lineHeight)
     })
 }
 
@@ -86,8 +85,8 @@ function drawImgOnCanvas(id) {
 //......... FIT CANVAS TO THE CONTAINER ......//
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container');
-    gCanvas.width = elContainer.offsetWidth
-    gCanvas.height = elContainer.offsetHeight
+    gCanvas.width = elContainer.offsetWidth;
+    gCanvas.height = elContainer.offsetHeight;
 }
 
 ///////.............................DOM EVENTS .......................////////
@@ -129,7 +128,7 @@ function onToggleOvelay() {
 
 function onSearch(inputVal) {
     gImgs.filter(img => {
-       return img.keywords.includes(inputVal);
+        return img.keywords.includes(inputVal);
     })
     renderCanvas();
 }
@@ -145,10 +144,9 @@ function onAlignTxt(txtAlign) {
     renderCanvas();
 }
 
-
 function onMoveNxtLine() {
-    nextLine()
-    document.querySelector('input[name="write-meme"]').placeholder = getCurrLine().txt;
+    nextLine();
+    document.querySelector('input[name="write-meme"]').value = getCurrLine().txt;
 }
 
 function onChangeFontFamily() {
@@ -188,8 +186,6 @@ function renderUserTab() {
         return `<img class="meme" src="${data}">`;
     }).join('');
     elImg.innerHTML = strHtml;
-    // if(window.innerWidth <= 600)
-    // onOpenHamburgerMenu();
 }
 
 function onMoveLineUp() {
@@ -206,32 +202,27 @@ function onMoveLineDown() {
 
 //................... DRAG AND DROP MEME ..................//
 function addMouseListeners() {
-    gCanvas.addEventListener('mousedown', onDown)
-    gCanvas.addEventListener('mousemove', onMove)
-    gCanvas.addEventListener('mouseup', onUp)
+    gCanvas.addEventListener('mousedown', onDown);
+    gCanvas.addEventListener('mousemove', onMove);
+    gCanvas.addEventListener('mouseup', onUp);
 }
 
 function onDown(ev) {
-    let line = gCanvas.getBoundingClientRect();
-    const pos = getEvPos(ev)
-    let x = pos.x - line.top;
-    let y = pos.y - line.left;
-    console.log('out')
-    if (!isLineClicked(x, y)) return;
-    console.log('in')
+    const pos = getEvPos(ev);
+    if (!isLineClicked(pos.x, pos.y)) return;
     gMeme.lines[gMeme.selectedLineIdx].isDragging = true;
-    gMeme.lines[gMeme.selectedLineIdx].idx = pos.x;
-    gMeme.lines[gMeme.selectedLineIdx].idy = pos.y;
-    document.body.style.cursor = 'grabbing'
+    document.body.style.cursor = 'grabbing';
+    gStPos = pos;
 }
 
 function onMove(ev) {
-    const pos = getEvPos(ev)
+    const pos = getEvPos(ev);
     if (gMeme.lines[gMeme.selectedLineIdx].isDragging) {
-        const dx = pos.x - gMeme.lines[gMeme.selectedLineIdx].idx;
-        const dy = pos.y - gMeme.lines[gMeme.selectedLineIdx].idy;
-        gMeme.lines[gMeme.selectedLineIdx].idx += dx;
-        gMeme.lines[gMeme.selectedLineIdx].idy += dy;
+        let diffX = pos.x - gStPos.x;
+        let diffY = pos.y - gStPos.y;
+        gMeme.lines[gMeme.selectedLineIdx].idx += diffX;
+        gMeme.lines[gMeme.selectedLineIdx].idy += diffY;
+        gStPos = pos;
         renderCanvas()
     }
 }
@@ -244,13 +235,11 @@ function onUp() {
 function isLineClicked(xPos, yPos) {
     let linePosx = getCurrLine().idx;
     let linePosy = getCurrLine().idy;
-    console.log(linePosx, linePosy)
-    const distance = Math.sqrt(
-        (xPos - linePosx) +
-        (yPos - linePosy))
-    let lineHeight = (gMeme.lines[gMeme.selectedLineIdx].size * 1.25);
-    console.log();
-    return distance <= lineHeight;
+    let txtWidth = gCtx.measureText(getCurrLine().txt).width;
+    let lineHeight = (getCurrLine().size * 1.25);
+    let distanceX = Math.sqrt((linePosx - xPos) ** 2);
+    let distanceY = Math.sqrt((linePosy - yPos) ** 2);
+    return (distanceX <= (txtWidth / 2) && distanceY <= lineHeight);
 }
 
 function addTouchListeners() {
@@ -269,6 +258,7 @@ function getEvPos(ev) {
         x: ev.offsetX,
         y: ev.offsetY
     }
+
     if (gTouchEvs.includes(ev.type)) {
         ev.preventDefault()
         ev = ev.changedTouches[0]
