@@ -4,8 +4,6 @@
 const MEMEKEY = 'meme';
 const IMGKEY = 'img';
 
-//............IMAGES ARRAY GLOBAL ..........//
-let gImgs = _createImgs();
 
 //.... EHCH MEME LINES THE USER EDITS ........//
 let gMeme = {
@@ -36,43 +34,111 @@ let gMeme = {
     }]
 };
 
+let gFilterBy = '';
 let gUserSavedMems = [];
 let gUserSavedImgs = [];
+let gKeyWords = ['kiss', 'trump', 'president', 'dutch', 'paint', 'baby', 'cute', 'puppies', 'cat', 'puppies', 'cute',
+    'dogs', 'love', 'boy', 'angry', 'star', 'famous', 'baby', 'evil', 'sunshine', 'famous', 'told you', 'professor', 'actor', 'evil', 'baby', 'dance', 'happy', 'trump', 'president', 'baby', 'funny', 'baby', 'funny', 'dog', 'funny',
+    'obama', 'president'
+];
 
-let gKeywords = {
+//............IMAGES ARRAY GLOBAL ..........//
+let gImgs = [{
+        id: 1,
+        url: 'img/1.jpg',
+        keywords: ['trump', 'president']
+    },
+    {
+        id: 2,
+        url: 'img/2.jpg',
+        keywords: ['dutch', 'paint']
+    },
+    {
+        id: 3,
+        url: 'img/3.jpg',
+        keywords: ['baby', 'cute', 'puppies']
+    },
+    {
+        id: 4,
+        url: 'img/4.jpg',
+        keywords: ['cat', 'puppies', 'cute']
+    },
+    {
+        id: 5,
+        url: 'img/5.jpg',
+        keywords: ['dogs, love']
+    },
+    {
+        id: 6,
+        url: 'img/6.jpg',
+        keywords: ['boy', 'angry']
+    },
+    {
+        id: 7,
+        url: 'img/7.jpg',
+        keywords: ['star', 'famous']
+    },
+    {
+        id: 8,
+        url: 'img/8.jpg',
+        keywords: ['baby', 'evil']
+    },
+    {
+        id: 9,
+        url: 'img/9.jpg',
+        keywords: ['sunshine']
+    },
+    {
+        id: 10,
+        url: 'img/10.jpg',
+        keywords: ['famous', 'told you']
+    },
+    {
+        id: 11,
+        url: 'img/11.jpg',
+        keywords: ['professor']
+    },
+    {
+        id: 12,
+        url: 'img/12.jpg',
+        keywords: ['actor', 'evil']
+    },
+    {
+        id: 13,
+        url: 'img/13.jpg',
+        keywords: ['baby', 'dance', 'happy']
+    },
+    {
+        id: 14,
+        url: 'img/14.jpg',
+        keywords: ['trump', 'president']
+    },
+    {
+        id: 15,
+        url: 'img/15.jpg',
+        keywords: ['baby, funny']
+    },
+    {
+        id: 16,
+        url: 'img/16.jpg',
+        keywords: ['dog', 'funny']
+    },
+    {
+        id: 17,
+        url: 'img/17.jpg',
+        keywords: ['obama', 'president']
+    },
+    {
+        id: 18,
+        url: 'img/18.jpg',
+        keywords: ['kiss']
+    }
+];
+
+let gKeywordsNum = {
     'happy': 12,
     'funny puk': 1
 };
-
-//...... KEY WORDS TO APPLY IN IMG KYWORDS ARRAY ............//
-let gKeyWordsList = ['happy', 'funny', 'angry', 'cute', 'sleepy'];
-
-//........MAKE THE IMGAGES ARRAY TO RENDER ..............//
-function _createImgs() {
-    let imgs = [];
-    for (let i = 0; i < 18; i++) {
-        let img = {
-            id: i + 1,
-            url: `img/${i+1}.jpg`,
-            keywords: ['funny']
-        }
-        imgs.push(img);
-    }
-    return imgs;
-}
-
-// setRandomKeyWord();
-// function setRandomKeyWord() {
-//     let imgs = _createImgs();
-//     imgs.forEach(img => {
-//         img.keywords[0] = getRandKeyWord();
-//     })
-// }
-
-// function getRandKeyWord(){
-//     let keyWord = gKeyWordsList[getRandomInt(0, gKeyWordsList.length-1)];
-//     return keyWord;
-// }
 
 //....... GET THE CUURENT LINE TXT THE USER EDITS .........//
 function getCurrLine() {
@@ -80,6 +146,27 @@ function getCurrLine() {
 }
 
 //...................... UPDATE MODEL FUNCTIONS ...............//
+
+function addLine() {
+    const line = {
+        txt: 'you know!!',
+        size: 50,
+        family: 'Arial',
+        align: 'left',
+        color: 'white',
+        stroke: 'black',
+        txtAlign: 'center',
+        idx: 200,
+        idy: 300,
+        isDragging: false
+    }
+    gMeme.lines.unshift(line);
+}
+
+function removeLine(line) {
+    gMeme.lines.shift(line);
+}
+
 function setCurImgIdx(idx) {
     gMeme.selectedImgId = idx;
 }
@@ -146,4 +233,8 @@ function saveUserMeme(userMeme, imgData) {
 function getUserSaveMeme() {
     let userMeme = loadFromStorage(IMGKEY);
     return userMeme;
+}
+
+function setFilter(filerBy) {
+    gFilterBy = filerBy;
 }

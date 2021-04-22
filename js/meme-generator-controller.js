@@ -14,8 +14,8 @@ function onInit() {
 }
 
 //.......... DISPLAY IMAGES FROM GLOBAL TO THE DOM ...........// 
-function renderGalery() {
-    let imgs = gImgs;
+function renderGalery(filterImg) {
+    let imgs = (!filterImg) ? gImgs : filterImg;
     let imgStrHtml = imgs.map(img => {
         return `
         <div onclick="renderMemeEditor(${img.id})" class="card pointer">
@@ -25,22 +25,12 @@ function renderGalery() {
     const elGallery = document.querySelector('.gallery');
     elGallery.innerHTML = imgStrHtml;
     const elKeyWords = document.querySelector('.key-words');
-    let strHtml = gKeyWordsList.map(word => {
+    let strHtml = gKeyWords.map(word => {
         return `
-        <span class="pointer">${word}</span>`;
+        <span class="pointer">${word }... </span>`;
     }).join('');
     elKeyWords.innerHTML = strHtml;
 }
-
-// function searchKeyWord(keyWord) {
-//     let copyArray = gImgs;
-//     let filterArray = gImgs.than(imgsArray => {
-//         imgsArray.filter(imgs => imgs.keywords == keyWord)
-//     })
-//     console.log('3333', filterArray);
-//     gImgs = filterArray;
-//     renderGalery();
-// }
 
 function renderMemeEditor(idx) {
     ontoggleGallery();
@@ -89,6 +79,7 @@ function resizeCanvas() {
     gCanvas.height = elContainer.offsetHeight;
 }
 
+
 ///////.............................DOM EVENTS .......................////////
 // ........... SWITCH DISPLAY GALLERY AND DISPLAY EDITOR ...........//
 function ontoggleGallery() {
@@ -126,11 +117,12 @@ function onToggleOvelay() {
     elOverLay.classList.toggle('hide');
 }
 
-function onSearch(inputVal) {
-    gImgs.filter(img => {
-        return img.keywords.includes(inputVal);
+function onSearchKeyWord(inputVal) {
+    setFilter(inputVal);
+    let f = gImgs.filter(img => {
+       return img.keywords.includes(gFilterBy);
     })
-    renderCanvas();
+    renderGalery(f);
 }
 
 // ................. EVENTS FROM MEME EDITOR ...........//
@@ -170,6 +162,20 @@ function onDecreaseFontSize() {
     decreaseFontSize();
     renderCanvas();
 }
+
+function onAddLine() {
+    let line = getCurrLine();
+    addLine();
+    renderCanvas();
+}
+
+function onRemoveLine() {
+    let line = getCurrLine();
+    if(!line) return;
+    removeLine(line);
+    renderCanvas();
+}
+
 
 function onSaveToTab() {
     const data = gCanvas.toDataURL();

@@ -58,10 +58,11 @@
         </section>
         <section class="content-container container flex">
             <div class="user-panel flex">
-                <input class="pointer" type="search" name="search-bar" placeholder="search">
+                <input onkeydown="onSearchKeyWord(this.value)" class="pointer" type="search" name="search-bar"
+                    placeholder="search">
                 <button class="btn more pointer">more</button>
             </div>
-            <span class="key-words">
+            <span class="key-words container flex">
                 <!-- RENDER KEYWORDS FROM JAVA SCRIPT --> </span>
             <section class="gallery grid">
                 <!----------------- RENDER CONTENT FROM JAVASCRIPT ----------->
@@ -76,9 +77,15 @@
                     onkeyup="onDrawTextOnCanvas(this.value)">
                 <button class="btn pointer" onclick="clearCanvas()"><i class="fas fa-trash-alt"></i></button>
                 <select class="btn pointer txt-capital" name="fonts" onchange="onChangeFontFamily()">
-                    <option value="Impact">Impact</option>
-                    <option value="Holtwood">Holtwood</option>
+                    <option value="impact">Impact</option>
+                    <option value="holtwood">Holtwood</option>
                 </select>
+                <button onclick="onAddLine()" class="btn pointer txt-capital">
+                    add line
+                </button>
+                <button onclick="onRemoveLine()" class="btn pointer txt-capital">
+                    delete line
+                </button>
                 <button data-align="left" onclick="onAlignTxt(this.dataset.align)" class="btn pointer">
                     <i class="fas fa-align-left"></i>
                 </button>

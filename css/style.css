@@ -44,6 +44,12 @@ main .content-container {
     flex: 1;
     font-size: 1rem;
     align-self: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.key-words > * {
+    margin-inline-start: 0.5rem;
 }
 /*............... MEME-EDITOR ................... */
 .meme-editor {
