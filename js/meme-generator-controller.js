@@ -210,6 +210,7 @@ function addListeners() {
 function onDown(ev) {
     const pos = getEvPos(ev);
     if (!isLineClicked(pos.x, pos.y)) return;
+    console.log('touch')
     gMeme.lines[gMeme.selectedLineIdx].isDragging = true;
     document.body.style.cursor = 'grabbing';
     gStPos = pos;
@@ -218,6 +219,7 @@ function onDown(ev) {
 function onMove(ev) {
     const pos = getEvPos(ev);
     if (gMeme.lines[gMeme.selectedLineIdx].isDragging) {
+        console.log('toumove')
         let diffX = pos.x - gStPos.x;
         let diffY = pos.y - gStPos.y;
         gMeme.lines[gMeme.selectedLineIdx].idx += diffX;
@@ -228,6 +230,7 @@ function onMove(ev) {
 }
 
 function onUp() {
+    console.log('toucancel')
     gMeme.lines[gMeme.selectedLineIdx].isDragging = false;
     document.body.style.cursor = 'grab';
 }
@@ -252,7 +255,7 @@ function addTouchListeners() {
 // })
 
 function getEvPos(ev) {
-    const pos = {
+    let pos = {
         x: ev.offsetX,
         y: ev.offsetY
     }
