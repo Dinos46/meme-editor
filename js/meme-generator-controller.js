@@ -9,17 +9,17 @@ let gTouchEvs = ['touchmove', 'touchstart', 'touchend'];
 function onInit() {
     gCanvas = document.querySelector('.canvas');
     gCtx = gCanvas.getContext('2d');
-    addMouseListeners();
+    addListeners();
     renderGalery();
 }
 
 //.......... DISPLAY IMAGES FROM GLOBAL TO THE DOM ...........// 
-function renderGalery(filterImg) {
-    let imgs = (!filterImg) ? gImgs : filterImg;
+function renderGalery(filterImgs) {
+    let imgs = (!filterImgs) ? gImgs : filterImgs;
     let imgStrHtml = imgs.map(img => {
         return `
         <div onclick="renderMemeEditor(${img.id})" class="card pointer">
-        <img src="${img.url}">
+        <img src="${img.url}" class="radius">
         </div>`;
     }).join('');
     const elGallery = document.querySelector('.gallery');
@@ -44,6 +44,24 @@ function renderCanvas() {
     setTimeout(drawTxt, 20);
 }
 
+//.........DRAW SELECTED IMAGE ON CANVAS.....//
+function drawImgOnCanvas(id) {
+    var img = new Image();
+    img.src = `./img/${id}.jpg`;
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+    }
+    // gCanvas.height = img.height;
+    // gCanvas.width = img.width;
+    resizeCanvasContainer();
+}
+
+function resizeCanvasContainer() {
+    const elContainer = document.querySelector('.canvas-container');
+    elContainer.style.width =  gCanvas.width + 'px';
+    elContainer.style.height = gCanvas.height + 'px';
+}
+
 //....DRAW TXT ON CANVAS.......//
 function drawTxt() {
     gMeme.lines.forEach(line => {
@@ -60,23 +78,6 @@ function drawTxt() {
 //.... ERASE ALL CANVAS DRAW, TEXT AND IMAGE........//
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
-}
-
-//.........DRAW SELECTED IMAGE ON CANVAS.....//
-function drawImgOnCanvas(id) {
-    var img = new Image();
-    img.src = `./img/${id}.jpg`;
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-        // resizeCanvas();
-    }
-}
-
-//......... FIT CANVAS TO THE CONTAINER ......//
-function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container');
-    gCanvas.width = elContainer.offsetWidth;
-    gCanvas.height = elContainer.offsetHeight;
 }
 
 
@@ -119,10 +120,10 @@ function onToggleOvelay() {
 
 function onSearchKeyWord(inputVal) {
     setFilter(inputVal);
-    let f = gImgs.filter(img => {
+    let filterImgs = gImgs.filter(img => {
        return img.keywords.includes(gFilterBy);
     })
-    renderGalery(f);
+    renderGalery(filterImgs);
 }
 
 // ................. EVENTS FROM MEME EDITOR ...........//
@@ -164,7 +165,6 @@ function onDecreaseFontSize() {
 }
 
 function onAddLine() {
-    let line = getCurrLine();
     addLine();
     renderCanvas();
 }
@@ -194,23 +194,17 @@ function renderUserTab() {
     elImg.innerHTML = strHtml;
 }
 
-function onMoveLineUp() {
-    let currLine = getCurrLine();
-    moveLineUp(currLine);
-    renderCanvas();
-}
-
-function onMoveLineDown() {
-    let currLine = getCurrLine();
-    moveLineDown(currLine);
-    renderCanvas();
-}
+    // .......... MOVE LINES FUNCTIONS .... ///
 
 //................... DRAG AND DROP MEME ..................//
-function addMouseListeners() {
+//.......... ADD LISINERS FO TOUCH SCREENS AND MOUSE ............//
+function addListeners() {
     gCanvas.addEventListener('mousedown', onDown);
     gCanvas.addEventListener('mousemove', onMove);
     gCanvas.addEventListener('mouseup', onUp);
+    gCanvas.addEventListener('touchmove', onMove)
+    gCanvas.addEventListener('touchstart', onDown)
+    gCanvas.addEventListener('touchend', onUp)
 }
 
 function onDown(ev) {
@@ -249,9 +243,7 @@ function isLineClicked(xPos, yPos) {
 }
 
 function addTouchListeners() {
-    gElCanvas.addEventListener('touchmove', onMove)
-    gElCanvas.addEventListener('touchstart', onDown)
-    gElCanvas.addEventListener('touchend', onUp)
+   
 }
 
 // window.addEventListener('resize', () => {

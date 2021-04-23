@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="shortcut icon" href="img/favicon-32x32.png" type="image/png">
+    <link rel="shortcut icon" href="./img/logo/favicon-32x32.png" type="image/png">
     <title>Meme Generator</title>
 </head>
 
@@ -17,16 +17,16 @@
     <header class="flex justify-center txt-capital">
         <nav class="links-container flex container">
             <div onclick="ontoggleGallery()" class="logo-container pointer">
-                <img src="img/LOGO.png" alt="meme logo">
+                <img src="./img/logo/LOGO.png" alt="meme logo">
             </div>
             <ul class="nav-links flex align-center list-style">
-                <li class="pointer" onclick="ontoggleGallery()">
+                <li class="pointer trans" onclick="ontoggleGallery()">
                     <a class="link-style" href="#">gallery</a>
                 </li>
-                <li class="pointer">
+                <li class="pointer trans">
                     <a class="link-style" href="#">about</a>
                 </li>
-                <li class="pointer" onclick="renderUserTab()">
+                <li class="pointer trans" onclick="renderUserTab()">
                     <a class="link-style" href="#">your memes</a>
                 </li>
             </ul>
@@ -37,13 +37,13 @@
         </div>
         <div class="drop-down-menu hide">
             <ul class="nav-links flex align-center list-style">
-                <li class="pointer" onclick="ontoggleGallery()">
+                <li class="pointer trans" onclick="ontoggleGallery()">
                     <a class="link-style" href="#">gallery</a>
                 </li>
-                <li class="pointer">
+                <li class="pointer trans">
                     <a class="link-style" href="#">about</a>
                 </li>
-                <li class="pointer" onclick="renderUserTab()">
+                <li class="pointer trans" onclick="renderUserTab()">
                     <a class="link-style" href="#">your memes</a>
                 </li>
             </ul>
@@ -51,7 +51,7 @@
     </header>
     <main class="flex align-center txt-capital">
         <section class="uesr-save-tab align-center flex hide">
-            <button class="close-tab btn txt-capital pointer" onclick="renderUserTab()">close</button>
+            <button class="close-tab btn trans pointer" onclick="renderUserTab()">close</button>
             <div class="img-container pointer grid">
                 <img src=""> <!-- RENDER IMG FROM JAVA SCRIPT -->
             </div>
@@ -60,7 +60,7 @@
             <div class="user-panel flex">
                 <input onkeydown="onSearchKeyWord(this.value)" class="pointer" type="search" name="search-bar"
                     placeholder="search">
-                <button class="btn more pointer">more</button>
+                <button class="btn-more btn pointer trans">more</button>
             </div>
             <span class="key-words container flex">
                 <!-- RENDER KEYWORDS FROM JAVA SCRIPT --> </span>
@@ -70,51 +70,74 @@
         </section>
         <section class="meme-editor container flex hide">
             <div class="canvas-container">
-                <canvas class="canvas" height="400" width="400"></canvas>
+                <canvas class="canvas border" height="500" width="500"></canvas>
             </div>
-            <div class="edit-panel flex">
-                <input class="txt-capital" type="text" name="write-meme" placeholder="enter your text"
-                    onkeyup="onDrawTextOnCanvas(this.value)">
-                <button class="btn pointer" onclick="clearCanvas()"><i class="fas fa-trash-alt"></i></button>
-                <select class="btn pointer txt-capital" name="fonts" onchange="onChangeFontFamily()">
-                    <option value="impact">Impact</option>
-                    <option value="holtwood">Holtwood</option>
-                </select>
-                <button onclick="onAddLine()" class="btn pointer txt-capital">
-                    add line
-                </button>
-                <button onclick="onRemoveLine()" class="btn pointer txt-capital">
-                    delete line
-                </button>
-                <button data-align="left" onclick="onAlignTxt(this.dataset.align)" class="btn pointer">
-                    <i class="fas fa-align-left"></i>
-                </button>
-                <button data-align="center" onclick="onAlignTxt(this.dataset.align)" class="btn pointer">
-                    <i class="fas fa-align-center"></i>
-                </button>
-                <button data-align="right" onclick="onAlignTxt(this.dataset.align)" class="btn pointer">
-                    <i class="fas fa-align-right"></i>
-                </button>
-                <button class="btn increase-font pointer" onclick="onIncreaseFontSize()">
-                    A+
-                </button>
-                <button class="btn decrease-font pointer" onclick="onDecreaseFontSize()">
-                    A-
-                </button>
-                <button class="btn txt-capital move-up pointer" onmousedown="onMoveLineUp()">
-                    move line up
-                </button>
-                <button class="btn txt-capital move-down pointer" onmousedown="onMoveLineDown()">
-                    move line down
-                </button>
-                <label class="pointer txt-capital" for="color-picker">pic a color
-                    <input id="color-picker" type="color" name="font-size" onchange="onChangeColor(this.value)">
-                </label>
-                <button class="btn txt-capital pointer" onclick="onMoveNxtLine()">next line</button>
-                <button class="btn txt-capital pointer" onclick="onSaveToTab()">save meme</button>
-                <button class="btn txt-capital pointer" onclick="renderUserTab()">open user tab</button>
-                <button class="btn txt-capital pointer"><a onclick="onDownloadMeme(this)">download</a></button>
 
+            <div class="edit-panel flex border">
+                <input type="text" name="write-meme" placeholder="enter your text"
+                    onkeyup="onDrawTextOnCanvas(this.value)">
+                <button class="btn-remove btn pointer pad trans" onclick="clearCanvas()">
+                    clear canvas
+                </button>
+
+                <div class="btn-add-remove flex">
+                    <button onclick="onAddLine()" class="btn-add btn pointer pad trans">
+                        add line
+                    </button>
+                    <button onclick="onRemoveLine()" class="btn-delete btn pointer pad trans">
+                        delete line
+                    </button>
+                </div>
+
+                <div class="txt-edit flex">
+                    <label class="pointer" for="color-picker">pic a color
+                        <input id="color-picker" type="color" name="font-size" onchange="onChangeColor(this.value)">
+                    </label>
+                    <label for="font"> font style
+                        <select id="font" class="btn pointer" name="fonts" onchange="onChangeFontFamily()">
+                            <option value="impact">Impact</option>
+                            <option value="holtwood">Holtwood</option>
+                        </select>
+                    </label>
+                    <div class="btn-container">
+                        <button data-align="left" onclick="onAlignTxt(this.dataset.align)"
+                            class="btn-left btn pointer pad trans">
+                            <i class="fas fa-align-left"></i>
+                        </button>
+                        <button data-align="center" onclick="onAlignTxt(this.dataset.align)"
+                            class="btn-center btn pointer pad trans">
+                            <i class="fas fa-align-center"></i>
+                        </button>
+                        <button data-align="right" onclick="onAlignTxt(this.dataset.align)"
+                            class="btn-right btn pointer pad trans">
+                            <i class="fas fa-align-right"></i>
+                        </button>
+                        <button class="btn btn-increase-font pointer pad trans" onclick="onIncreaseFontSize()">
+                            A+
+                        </button>
+                        <button class="btn btn-decrease-font pointer pad trans" onclick="onDecreaseFontSize()">
+                            A-
+                        </button>
+                    </div>
+                </div>
+                <!-- MOVE LINE BUTTONS-->
+                <button class="btn-nxt btn pointer pad trans" onclick="onMoveNxtLine()">
+                    next line
+                </button>
+                <button class="btn-save btn pointer pad trans" onclick="onSaveToTab()">
+                    save meme
+                </button>
+                <button class="btn-tab btn pointer pad trans" onclick="renderUserTab()">
+                    open user tab
+                </button>
+                <div class="btn-download-share flex">
+                    <button class="btn-download btn pointer pad trans">
+                        <a onclick="onDownloadMeme(this)">download</a>
+                    </button>
+                    <button class="btn-share btn pointer pad">
+                        share
+                    </button>
+                </div>
             </div>
         </section>
 

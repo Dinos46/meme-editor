@@ -43,96 +43,25 @@ let gKeyWords = ['kiss', 'trump', 'president', 'dutch', 'paint', 'baby', 'cute',
 ];
 
 //............IMAGES ARRAY GLOBAL ..........//
-let gImgs = [{
-        id: 1,
-        url: 'img/1.jpg',
-        keywords: ['trump', 'president']
-    },
-    {
-        id: 2,
-        url: 'img/2.jpg',
-        keywords: ['dutch', 'paint']
-    },
-    {
-        id: 3,
-        url: 'img/3.jpg',
-        keywords: ['baby', 'cute', 'puppies']
-    },
-    {
-        id: 4,
-        url: 'img/4.jpg',
-        keywords: ['cat', 'puppies', 'cute']
-    },
-    {
-        id: 5,
-        url: 'img/5.jpg',
-        keywords: ['dogs, love']
-    },
-    {
-        id: 6,
-        url: 'img/6.jpg',
-        keywords: ['boy', 'angry']
-    },
-    {
-        id: 7,
-        url: 'img/7.jpg',
-        keywords: ['star', 'famous']
-    },
-    {
-        id: 8,
-        url: 'img/8.jpg',
-        keywords: ['baby', 'evil']
-    },
-    {
-        id: 9,
-        url: 'img/9.jpg',
-        keywords: ['sunshine']
-    },
-    {
-        id: 10,
-        url: 'img/10.jpg',
-        keywords: ['famous', 'told you']
-    },
-    {
-        id: 11,
-        url: 'img/11.jpg',
-        keywords: ['professor']
-    },
-    {
-        id: 12,
-        url: 'img/12.jpg',
-        keywords: ['actor', 'evil']
-    },
-    {
-        id: 13,
-        url: 'img/13.jpg',
-        keywords: ['baby', 'dance', 'happy']
-    },
-    {
-        id: 14,
-        url: 'img/14.jpg',
-        keywords: ['trump', 'president']
-    },
-    {
-        id: 15,
-        url: 'img/15.jpg',
-        keywords: ['baby, funny']
-    },
-    {
-        id: 16,
-        url: 'img/16.jpg',
-        keywords: ['dog', 'funny']
-    },
-    {
-        id: 17,
-        url: 'img/17.jpg',
-        keywords: ['obama', 'president']
-    },
-    {
-        id: 18,
-        url: 'img/18.jpg',
-        keywords: ['kiss']
-    }
+let gImgs = [
+    {id: 1, url: './img/1.jpg', keywords: ['trump', 'president']},
+    {id: 2, url: './img/2.jpg', keywords: ['trump', 'president']},
+    {id: 3, url: './img/3.jpg', keywords: ['trump', 'president']},
+    {id: 4, url: './img/4.jpg', keywords: ['trump', 'president']},
+    {id: 5, url: './img/5.jpg', keywords: ['trump', 'president']},
+    {id: 6, url: './img/6.jpg', keywords: ['trump', 'president']},
+    {id: 7, url: './img/7.jpg', keywords: ['trump', 'president']},
+    {id: 8, url: './img/8.jpg', keywords: ['trump', 'president']},
+    {id: 9, url: './img/9.jpg', keywords: ['trump', 'president']},
+    {id: 10, url: './img/10.jpg', keywords: ['trump', 'president']},
+    {id: 11, url: './img/11.jpg', keywords: ['trump', 'president']},
+    {id: 12, url: './img/12.jpg', keywords: ['trump', 'president']},
+    {id: 13, url: './img/13.jpg', keywords: ['trump', 'president']},
+    {id: 14, url: './img/14.jpg', keywords: ['trump', 'president']},
+    {id: 15, url: './img/15.jpg', keywords: ['trump', 'president']},
+    {id: 16, url: './img/16.jpg', keywords: ['trump', 'president']},
+    {id: 17, url: './img/17.jpg', keywords: ['trump', 'president']},
+    {id: 18, url: './img/18.jpg', keywords: ['trump', 'president']}
 ];
 
 let gKeywordsNum = {

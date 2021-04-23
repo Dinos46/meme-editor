@@ -1,0 +1,78 @@
+/*............... MEME-EDITOR ................... */
+.meme-editor {
+    width: 100%;
+    justify-content: space-between;
+    margin: 0.5rem;
+}
+
+.meme-editor label[for="font"] {
+    align-self: center;
+}
+
+.edit-panel {
+    background-color: rgba(159, 159, 154, 0.3);
+    flex-direction: column;
+    padding: 0.5rem;
+    margin: 1rem 1rem 1rem 1rem;
+    font-family: popins-medium, sans-serif;
+}
+
+.edit-panel>*:not(:first-child) {
+    margin-block-start: 1rem;
+}
+
+.edit-panel input[name="font-size"],
+.edit-panel label[for="color-picker"] {
+    align-self: center;
+}
+
+.edit-panel input[name="write-meme"] {
+    font-family: popins-medium, sans-serif;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    border: none;
+    padding: 0.5rem 0;
+}
+
+.edit-panel .txt-edit {
+    font-family: popins-medium, sans-serif;
+    justify-content: center;
+    background-color: #95709f;
+    flex-direction: column;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.edit-panel .btn-add-remove {
+    justify-content: space-around;
+}
+
+.edit-panel .txt-edit> :not(:first-child) {
+    margin-block-start: 0.5rem;
+}
+
+.edit-panel .txt-edit .btn-container> :not(:last-child) {
+    margin-inline-end: 0.2rem;
+}
+
+
+.btn-download-share {
+    justify-content: space-evenly;
+}
+
+.canvas-container {
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+.uesr-save-tab {
+    margin-block-start: 1rem;
+    padding: 1rem;
+    flex-direction: column;
+    width: 100%;
+}
+
+.uesr-save-tab .close-tab {
+    padding: 0 1rem;
+}

@@ -2,6 +2,8 @@
 @import "./typography.css";
 @import "./header.css";
 @import "./gallery.css";
+@import "./meme-editor.css";
+@import "./buttons.css";
 @import "./footer.css";
 
 * {
@@ -23,7 +25,7 @@ img {
 
 .overlay-filter {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
 }
@@ -32,6 +34,7 @@ img {
 main {
     flex-direction: column;
     padding-block-start: 1.5rem;
+    margin-block-end: 1rem;
 }
 
 main .content-container {
@@ -48,55 +51,83 @@ main .content-container {
     padding: 1rem;
 }
 
-.key-words > * {
-    margin-inline-start: 0.5rem;
-}
-/*............... MEME-EDITOR ................... */
-.meme-editor {
-    width: 100%;
-    justify-content: space-around;
-}
-
-.edit-panel {
-    background-color: #19a59f;
-    border: 2px solid;
-    flex-direction: column;
-    padding: 0.5rem;
+.key-words>* {
     margin-inline-start: 0.5rem;
 }
 
-.edit-panel>*:not(:first-child) {
-    margin-block-start: 1rem;
-}
-
-.edit-panel input[name="font-size"],
-.edit-panel label[for="color-picker"] {
-    align-self: center;
-
-}
-
-.edit-panel input[name="write-meme"] {
-    border-radius: 2rem;
-    font-size: 1rem;
-    text-align: center;
-    outline: none;
-    border: none;
-}
-
-.uesr-save-tab {
-    margin-block-start: 1rem;
-    padding: 1rem;
-    flex-direction: column;
-    width: 100%;
-}
-
-.uesr-save-tab .close-tab{
-    padding: 0 1rem;
-}
 
 /*...................... SMALL SCREEN ....................... */
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 800px) {
 
+    .meme-editor {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .edit-panel {
+        align-items: baseline;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .meme-editor .edit-panel>* {
+        margin-inline-end: 0.5rem;
+    }
+
+    .btn-add-remove>* {
+        margin-inline-end: 0.5rem;
+    }
+
+    .edit-panel .txt-edit {
+        flex-direction: row;
+    }
+
+
+    /* .btn-download-share>* {
+        margin-inline-end: 0.5rem;
+    } */
+
+    input[name="write-meme"] {
+        flex: 1;
+    }
+
+    .btn-save {
+        flex: 1;
+    }
+
+    .btn-tab {
+        flex: 1;
+    }
+
+    .edit-panel .btn-download-share {
+        width: 100%;
+        flex-direction: row-reverse;
+        padding: 0;
+        margin-block-start: 0.5rem;
+    }
+
+    button.btn-download,
+    button.btn-share {
+        flex: 1;
+    }
+
+    button.btn-share {
+        margin-inline-end: 0.5rem;
+    }
+
+    .edit-panel>* {
+        padding: 0.5rem;
+    }
+
+    @keyframes right-to-left {
+        100% {
+            left: 30%;
+        }
+    }
+
+}
+
+@media screen and (max-width: 625px) {
     header nav.links-container ul {
         display: none;
     }
@@ -113,17 +144,19 @@ main .content-container {
         width: 70%;
         animation: right-to-left 1s ease-in forwards;
     }
-    
+
     .drop-down-menu .nav-links {
         flex-direction: column;
         margin-block-start: 1rem;
         height: 20%;
         width: 100%;
     }
-    
+
     .drop-down-menu .nav-links li {
         margin-block-start: 1rem;
-        background: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+        background: rgb(149, 112, 159);
+        background:
+            radial-gradient(circle, rgba(149, 112, 159, 1) 54%, rgba(109, 53, 148, 1) 74%);
         width: 100%;
         height: 100%;
         display: flex;
@@ -132,31 +165,21 @@ main .content-container {
         border-radius: 1rem;
     }
 
+    header ul.nav-links li {
+        margin-inline-end: 2rem;
+    }
+
+    header ul.nav-links li:hover,
+    header ul.nav-links li:focus {
+        background-color: #9f9f9a;
+        color: #95709f;
+    }
+
     .hamburger-menu {
         display: flex;
     }
 
-    .meme-editor {
-        flex-direction: column;
-        align-items: center;
-    }
-
     .edit-panel {
-        align-items: baseline;
-        margin-inline-start: 0.5rem;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
+        padding: 0.5rem 0;
     }
-
-    .edit-panel>* {
-        padding: 0.5rem;
-    }
-
-    @keyframes right-to-left {
-        100%{
-            left: 30%;
-        }
-    }
-
 }

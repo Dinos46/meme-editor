@@ -1,8 +1,9 @@
 /*........................... FOOTER ....................... */
 footer {
-    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    background: rgb(149,112,159);
+    background: radial-gradient(circle, rgba(149,112,159,1) 54%, rgba(109,53,148,1) 74%);
     padding: 1rem;
-    margin-block-start: 1rem;
+    margin-block-start: 2rem;
 }
 
 .fa-times,
