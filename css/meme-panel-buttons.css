@@ -1,12 +1,11 @@
 /*...................... MEME PANEL BUTTONS STYLE .............. */
 
 .edit-panel .txt-edit button {
-    font-family: popins-medium, sans-serif;
     padding: 0.3rem 1.2rem;
 }
 
-.edit-panel .txt-edit button:hover,
-.edit-panel .txt-edit button:focus {
+.edit-panel .btn-container button:hover,
+.edit-panel .btn-container button:focus {
     background-color: #22252c;
     color: #eeeded;
 }

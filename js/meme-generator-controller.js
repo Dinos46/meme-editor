@@ -14,11 +14,13 @@ function onInit() {
 }
 
 //.......... DISPLAY IMAGES FROM GLOBAL TO THE DOM ...........// 
-function renderGalery(filterImgs) {
-    let imgs = (!filterImgs) ? gImgs : filterImgs;
+function renderGalery() {
+    let filterImgs = getFilterImgs();
+    let imgs = filterImgs;
     let imgStrHtml = imgs.map(img => {
         return `
-        <div onclick="renderMemeEditor(${img.id})" class="card pointer">
+        <div onclick="renderMemeEditor(${img.id})" class="card pointer border">
+        <div class="img-filter trans"></div>
         <img src="${img.url}" class="radius">
         </div>`;
     }).join('');
@@ -41,7 +43,16 @@ function renderMemeEditor(idx) {
 //..... DISPLAY TEXT AND SELECTED IMAGE ON CANVAS......//
 function renderCanvas() {
     drawImgOnCanvas(gMeme.selectedImgId);
-    setTimeout(drawTxt, 20);
+    setTimeout(() => {
+        drawTxt();
+    }, 20);
+}
+
+
+function onLoadFromTab() {
+    console.log(gUserSavedMems);
+    console.log(gUserSavedImgs);
+    //    renderCanvas();
 }
 
 //.........DRAW SELECTED IMAGE ON CANVAS.....//
@@ -51,14 +62,13 @@ function drawImgOnCanvas(id) {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
     }
-    // gCanvas.height = img.height;
-    // gCanvas.width = img.width;
     resizeCanvasContainer();
 }
 
+
 function resizeCanvasContainer() {
     const elContainer = document.querySelector('.canvas-container');
-    elContainer.style.width =  gCanvas.width + 'px';
+    elContainer.style.width = gCanvas.width + 'px';
     elContainer.style.height = gCanvas.height + 'px';
 }
 
@@ -88,6 +98,7 @@ function ontoggleGallery() {
     const elMainContent = document.querySelector('.content-container');
     elMainContent.classList.toggle('hide');
     elMemeEditor.classList.toggle('hide');
+    resetMeme();
 }
 
 function onDownloadMeme(elLink) {
@@ -98,7 +109,7 @@ function onDownloadMeme(elLink) {
 
 //.......... OPEN HAMBURGER MENU DROP DOWN MENU ....//
 function onOpenHamburgerMenu() {
-    if (window.innerWidth > 600) return;
+    if (window.innerWidth > 675) return;
     const elDropDown = document.querySelector('.drop-down-menu');
     elDropDown.classList.toggle('hide');
     elDropDown.classList.toggle('flex');
@@ -120,10 +131,7 @@ function onToggleOvelay() {
 
 function onSearchKeyWord(inputVal) {
     setFilter(inputVal);
-    let filterImgs = gImgs.filter(img => {
-       return img.keywords.includes(gFilterBy);
-    })
-    renderGalery(filterImgs);
+    renderGalery();
 }
 
 // ................. EVENTS FROM MEME EDITOR ...........//
@@ -139,6 +147,7 @@ function onAlignTxt(txtAlign) {
 
 function onMoveNxtLine() {
     nextLine();
+    (!getCurrLine().txt)
     document.querySelector('input[name="write-meme"]').value = getCurrLine().txt;
 }
 
@@ -170,12 +179,9 @@ function onAddLine() {
 }
 
 function onRemoveLine() {
-    let line = getCurrLine();
-    if(!line) return;
-    removeLine(line);
+    removeLine(gMeme.selectedLineIdx);
     renderCanvas();
 }
-
 
 function onSaveToTab() {
     const data = gCanvas.toDataURL();
@@ -194,7 +200,7 @@ function renderUserTab() {
     elImg.innerHTML = strHtml;
 }
 
-    // .......... MOVE LINES FUNCTIONS .... ///
+// .......... MOVE LINES FUNCTIONS .... ///
 
 //................... DRAG AND DROP MEME ..................//
 //.......... ADD LISINERS FO TOUCH SCREENS AND MOUSE ............//
@@ -210,16 +216,15 @@ function addListeners() {
 function onDown(ev) {
     const pos = getEvPos(ev);
     if (!isLineClicked(pos.x, pos.y)) return;
-    console.log('touch')
     gMeme.lines[gMeme.selectedLineIdx].isDragging = true;
-    document.body.style.cursor = 'grabbing';
     gStPos = pos;
+    document.body.style.cursor = 'grabbing';
 }
 
 function onMove(ev) {
     const pos = getEvPos(ev);
+    if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     if (gMeme.lines[gMeme.selectedLineIdx].isDragging) {
-        console.log('toumove')
         let diffX = pos.x - gStPos.x;
         let diffY = pos.y - gStPos.y;
         gMeme.lines[gMeme.selectedLineIdx].idx += diffX;
@@ -230,7 +235,6 @@ function onMove(ev) {
 }
 
 function onUp() {
-    console.log('toucancel')
     gMeme.lines[gMeme.selectedLineIdx].isDragging = false;
     document.body.style.cursor = 'grab';
 }
@@ -244,15 +248,6 @@ function isLineClicked(xPos, yPos) {
     let distanceY = Math.sqrt((linePosy - yPos) ** 2);
     return (distanceX <= (txtWidth / 2) && distanceY <= lineHeight);
 }
-
-function addTouchListeners() {
-   
-}
-
-// window.addEventListener('resize', () => {
-//     resizeCanvas();
-//     renderCanvas();
-// })
 
 function getEvPos(ev) {
     let pos = {

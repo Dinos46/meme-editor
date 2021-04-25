@@ -3,7 +3,7 @@
 @import "./header.css";
 @import "./gallery.css";
 @import "./meme-editor.css";
-@import "./buttons.css";
+@import "./meme-panel-buttons.css";
 @import "./footer.css";
 
 * {
@@ -21,13 +21,19 @@ body {
 
 img {
     width: 100%;
+    height: 100%;
+}
+
+button {
+    font-family: popins-medium, sans-serif;
 }
 
 .overlay-filter {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100%;
+    z-index: 2;
 }
 
 /*.................. MAIN..............  */
@@ -55,7 +61,6 @@ main .content-container {
     margin-inline-start: 0.5rem;
 }
 
-
 /*...................... SMALL SCREEN ....................... */
 @media screen and (max-width: 800px) {
 
@@ -65,69 +70,72 @@ main .content-container {
     }
 
     .edit-panel {
-        align-items: baseline;
-        flex-direction: row;
-        flex-wrap: wrap;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(15, 1fr);
+        margin: 0;
+        padding: 0.5rem 0;
+        margin-block-start: 1.5rem;
     }
 
-    .meme-editor .edit-panel>* {
-        margin-inline-end: 0.5rem;
-    }
-
-    .btn-add-remove>* {
-        margin-inline-end: 0.5rem;
-    }
-
-    .edit-panel .txt-edit {
-        flex-direction: row;
-    }
-
-
-    /* .btn-download-share>* {
-        margin-inline-end: 0.5rem;
-    } */
-
-    input[name="write-meme"] {
-        flex: 1;
-    }
-
-    .btn-save {
-        flex: 1;
-    }
-
-    .btn-tab {
-        flex: 1;
-    }
-
-    .edit-panel .btn-download-share {
-        width: 100%;
-        flex-direction: row-reverse;
-        padding: 0;
-        margin-block-start: 0.5rem;
-    }
-
-    button.btn-download,
-    button.btn-share {
-        flex: 1;
-    }
-
-    button.btn-share {
-        margin-inline-end: 0.5rem;
-    }
-
-    .edit-panel>* {
+    .edit-panel input[name="write-meme"] {
+        grid-column: 2/8;
         padding: 0.5rem;
     }
 
-    @keyframes right-to-left {
-        100% {
-            left: 30%;
-        }
+    .btn-remove {
+        grid-column: 9/15;
+        grid-row: 1/2;
     }
 
+    .btn-add {
+        grid-row: 2/3;
+        grid-column: 2/6;
+    }
+
+    .btn-delete {
+        grid-row: 2/3;
+        grid-column: 6/10;
+    }
+
+    .btn-container {
+        grid-row: 2/3;
+        grid-column: 10/15;
+    }
+
+    .btn-color {
+        grid-row: 3/4;
+        grid-column: 2/8;
+    }
+
+    .btn-font {
+        grid-row: 3/4;
+        grid-column: 6/15;
+    }
+
+    .btn-nxt {
+        grid-row: 3/4;
+        grid-column: 11/15;
+    }
+
+    .btn-save {
+        grid-row: 4/5;
+        grid-column: 2/5;
+    }
+
+    .btn-tab {
+        grid-row: 4/5;
+        grid-column: 5/9;
+    }
+
+    .btn-download-share {
+        grid-row: 4/5;
+        grid-column: 9/15;
+        justify-content: space-evenly;
+    }
 }
 
-@media screen and (max-width: 625px) {
+@media screen and (max-width: 675px) {
+
     header nav.links-container ul {
         display: none;
     }
@@ -143,6 +151,7 @@ main .content-container {
         top: 8%;
         width: 70%;
         animation: right-to-left 1s ease-in forwards;
+        z-index: 3;
     }
 
     .drop-down-menu .nav-links {
@@ -156,7 +165,7 @@ main .content-container {
         margin-block-start: 1rem;
         background: rgb(149, 112, 159);
         background:
-            radial-gradient(circle, rgba(149, 112, 159, 1) 54%, rgba(109, 53, 148, 1) 74%);
+        radial-gradient(circle, rgba(149, 112, 159, 1) 54%, rgba(109, 53, 148, 1) 74%);
         width: 100%;
         height: 100%;
         display: flex;
@@ -181,5 +190,11 @@ main .content-container {
 
     .edit-panel {
         padding: 0.5rem 0;
+    }
+
+    @keyframes right-to-left {
+        100% {
+            left: 30%;
+        }
     }
 }

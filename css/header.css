@@ -4,6 +4,7 @@ header {
     background:
         radial-gradient(circle, rgba(149, 112, 159, 1) 54%, rgba(109, 53, 148, 1) 74%);
     padding: 1rem;
+    border-radius: 0.8rem;
 }
 
 header .links-container {

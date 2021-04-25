@@ -13,7 +13,7 @@
 </head>
 
 <body onload="onInit()">
-    <div onclick=" onOpenHamburgerMenu()" class="overlay-filter pointer hide"></div>
+    <div onclick=" onOpenHamburgerMenu()" class="overlay-filter pointer trans hide"></div>
     <header class="flex justify-center txt-capital">
         <nav class="links-container flex container">
             <div onclick="ontoggleGallery()" class="logo-container pointer">
@@ -52,73 +52,75 @@
     <main class="flex align-center txt-capital">
         <section class="uesr-save-tab align-center flex hide">
             <button class="close-tab btn trans pointer" onclick="renderUserTab()">close</button>
-            <div class="img-container pointer grid">
-                <img src=""> <!-- RENDER IMG FROM JAVA SCRIPT -->
+            <div class="img-container pointer grid" onclick="onLoadFromTab()">
+                <!-- RENDER IMG FROM JAVA SCRIPT -->
             </div>
         </section>
         <section class="content-container container flex">
             <div class="user-panel flex">
-                <input onkeydown="onSearchKeyWord(this.value)" class="pointer" type="search" name="search-bar"
+                <input oninput="onSearchKeyWord(this.value)" class="pointer" type="search" name="search-bar"
                     placeholder="search">
                 <button class="btn-more btn pointer trans">more</button>
             </div>
             <span class="key-words container flex">
-                <!-- RENDER KEYWORDS FROM JAVA SCRIPT --> </span>
+                <!-- RENDER KEYWORDS FROM JAVA SCRIPT -->
+            </span>
             <section class="gallery grid">
                 <!----------------- RENDER CONTENT FROM JAVASCRIPT ----------->
             </section>
         </section>
         <section class="meme-editor container flex hide">
-            <div class="canvas-container">
+            <div class="canvas-container ">
                 <canvas class="canvas border" height="500" width="500"></canvas>
             </div>
 
-            <div class="edit-panel flex border">
+            <div class="edit-panel border">
                 <input type="text" name="write-meme" placeholder="enter your text"
                     onkeyup="onDrawTextOnCanvas(this.value)">
                 <button class="btn-remove btn pointer pad trans" onclick="clearCanvas()">
                     clear canvas
                 </button>
 
-                <div class="btn-add-remove flex">
-                    <button onclick="onAddLine()" class="btn-add btn pointer pad trans">
-                        add line
-                    </button>
-                    <button onclick="onRemoveLine()" class="btn-delete btn pointer pad trans">
-                        delete line
-                    </button>
-                </div>
 
-                <div class="txt-edit flex">
+                <button onclick="onAddLine()" class="btn-add btn pointer pad trans">
+                    add line
+                </button>
+                <button onclick="onRemoveLine()" class="btn-delete btn pointer pad trans">
+                    delete line
+                </button>
+                <div class="btn-color">
                     <label class="pointer" for="color-picker">pic a color
                         <input id="color-picker" type="color" name="font-size" onchange="onChangeColor(this.value)">
                     </label>
+                </div>
+                <div class="btn-font">
                     <label for="font"> font style
                         <select id="font" class="btn pointer" name="fonts" onchange="onChangeFontFamily()">
                             <option value="impact">Impact</option>
                             <option value="holtwood">Holtwood</option>
                         </select>
                     </label>
-                    <div class="btn-container">
-                        <button data-align="left" onclick="onAlignTxt(this.dataset.align)"
-                            class="btn-left btn pointer pad trans">
-                            <i class="fas fa-align-left"></i>
-                        </button>
-                        <button data-align="center" onclick="onAlignTxt(this.dataset.align)"
-                            class="btn-center btn pointer pad trans">
-                            <i class="fas fa-align-center"></i>
-                        </button>
-                        <button data-align="right" onclick="onAlignTxt(this.dataset.align)"
-                            class="btn-right btn pointer pad trans">
-                            <i class="fas fa-align-right"></i>
-                        </button>
-                        <button class="btn btn-increase-font pointer pad trans" onclick="onIncreaseFontSize()">
-                            A+
-                        </button>
-                        <button class="btn btn-decrease-font pointer pad trans" onclick="onDecreaseFontSize()">
-                            A-
-                        </button>
-                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button data-align="left" onclick="onAlignTxt(this.dataset.align)"
+                        class="btn-left btn pointer pad trans">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <button data-align="center" onclick="onAlignTxt(this.dataset.align)"
+                        class="btn-center btn pointer pad trans">
+                        <i class="fas fa-align-center"></i>
+                    </button>
+                    <button data-align="right" onclick="onAlignTxt(this.dataset.align)"
+                        class="btn-right btn pointer pad trans">
+                        <i class="fas fa-align-right"></i>
+                    </button>
+                    <button class="btn btn-increase-font pointer pad trans" onclick="onIncreaseFontSize()">
+                        A+
+                    </button>
+                    <button class="btn btn-decrease-font pointer pad trans" onclick="onDecreaseFontSize()">
+                        A-
+                    </button>
                 </div>
                 <!-- MOVE LINE BUTTONS-->
                 <button class="btn-nxt btn pointer pad trans" onclick="onMoveNxtLine()">
