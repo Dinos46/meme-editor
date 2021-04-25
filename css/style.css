@@ -61,6 +61,10 @@ main .content-container {
     margin-inline-start: 0.5rem;
 }
 
+.user-save-tab {
+    flex-direction: column;
+}
+
 /*...................... SMALL SCREEN ....................... */
 @media screen and (max-width: 800px) {
 
